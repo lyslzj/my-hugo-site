@@ -3,3 +3,7 @@
 node_modules/
 .DS_Store
 *.log
+
+# 本地发布工具，不上库（含本机绝对路径）
+/deploy.ps1
+/发布博客.bat
