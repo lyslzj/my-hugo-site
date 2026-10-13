@@ -7,3 +7,4 @@ node_modules/
 # 本地发布工具，不上库（含本机绝对路径）
 /deploy.ps1
 /发布博客.bat
+/博客自动发布-任务计划.xml
