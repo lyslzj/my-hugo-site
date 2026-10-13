@@ -1,0 +1,131 @@
+/* ===== 复古个人主页样式 ===== */
+body {
+    background: #E7E7F7 url('/images/bg1.gif');
+    font-family: "SimSun", "宋体", serif;
+    font-size: 12px;
+    color: #000;
+    margin: 0;
+    padding: 15px 0;
+}
+.page {
+    width: 916px;
+    margin: 0 auto;
+    background: #E7E7F7 url('/images/bg1.gif');
+    border: 1px solid #000;
+    padding: 10px 12px;
+}
+a { color: #0000EE; text-decoration: underline; }
+
+/* ---- 顶部信息表 ---- */
+table.head { width: 100%; border-collapse: collapse; }
+table.head td { border: 1px solid #000; padding: 6px; vertical-align: middle; }
+td.head-photo { width: 250px; text-align: center; }
+td.head-quote { text-align: center; padding-right: 20px; }
+td.head-quote h2 {
+    font-family: "KaiTi", "楷体", serif;
+    font-size: 20px;
+    font-weight: normal;
+    line-height: 2;
+    margin: 0;
+    text-align: center;
+}
+td.head-quote .motto-text { display: block; text-align: center; }
+td.head-quote .motto-author { display: block; text-align: right; }
+td.head-login { width: 230px; line-height: 1.6; }
+td.head-login input { font-size: 12px; }
+td.head-studio { height: 40px; text-align: center; font-size: 14px; }
+
+/* ---- 导航条 ---- */
+.menu-bar {
+    margin-top: 10px;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+    padding: 7px 0;
+    text-align: center;
+}
+.menu-bar a {
+    margin: 0 13px;
+    color: #000;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 2px 4px;
+}
+.menu-bar a:hover { background: #C8C8FF; }
+.menu-bar a.active { color: red; }
+
+/* ---- 欢迎语（复古双线框） ---- */
+.welcome {
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 6px;
+    margin: 26px 0;
+    padding: 12px 20px;
+    border: 1px solid #000;
+    outline: 1px solid #000;
+    outline-offset: 4px;
+    background: #E7E7F7 url('/images/bg1.gif');
+}
+
+/* ---- 主体 ---- */
+table.main { width: 100%; border-collapse: collapse; }
+table.main > tbody > tr > td { vertical-align: top; }
+td.meta { width: 185px; padding: 0 18px 10px 5px; border-right: 1px solid #000; }
+td.body { padding-left: 22px; }
+
+/* 左栏：引言 */
+.meta-quote { margin-bottom: 15px; line-height: 1.8; }
+.meta-quote p { margin: 0; }
+.meta-quote .q-left { text-align: left; }
+.meta-quote .q-right { text-align: right; }
+
+/* 左栏：日期 */
+.meta-date { text-align: center; margin: 10px 0 18px; }
+.md-week { font-size: 12px; }
+.md-day { font-size: 34px; font-weight: bold; line-height: 1.2; margin: 2px 0; }
+.md-ym { font-size: 12px; }
+
+/* 左栏：分隔标题（═══ 信 息 ═══） */
+.meta-title { display: flex; align-items: center; margin: 14px 0 10px; }
+.meta-title span { padding: 0 10px; font-weight: bold; font-size: 14px; letter-spacing: 4px; }
+.meta-title::before, .meta-title::after {
+    content: "";
+    flex: 1;
+    height: 3px;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+}
+.meta-info { line-height: 2.2; text-align: center; }
+.meta-stats { line-height: 1.9; text-align: center; }
+
+/* ---- 区块标题（淡紫底） ---- */
+.section-header {
+    background: #C8C8FF;
+    border: 1px solid #000;
+    padding: 2px 8px;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+/* ---- 两列内容 ---- */
+table.body-cols { width: 100%; border-collapse: collapse; }
+td.col-news { width: 335px; border-right: 1px solid #000; padding-right: 28px; vertical-align: top; }
+td.col-updates { padding-left: 28px; vertical-align: top; }
+.news-item { padding: 10px 0 14px 15px; line-height: 1.8; }
+.notice2 { color: #CC0000; font-weight: bold; }
+.sub-links { text-align: center; padding: 8px 0 10px; }
+
+/* ---- 列表行 ---- */
+table.list { width: 100%; border-collapse: collapse; }
+table.list td { padding: 4px 0 0 0; vertical-align: bottom; }
+td.list-cat { width: 82px; padding-left: 15px; white-space: nowrap; }
+td.list-title { overflow: hidden; }
+.scrollTitle { white-space: nowrap; overflow: hidden; }
+
+/* ---- 页脚 ---- */
+.footer {
+    margin-top: 18px;
+    border-top: 3px double #000;
+    text-align: center;
+    padding: 10px 0 4px;
+}

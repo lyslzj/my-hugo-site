@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>用户注册 · 我的个人博客</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="page">
+
+    <!-- 导航条（与首页一致） -->
+    <div class="menu-bar">
+        <a href="/">网站首页</a>
+        <a href="/posts/">全部日志</a>
+        <a href="/memories/">忆昔岁月</a>
+        <a href="/software/">软件集锦</a>
+        <a href="/science/">冰花雪纹</a>
+        <a href="/tech/">技术长廊</a>
+        <a href="/life/">生活随笔</a>
+        <a href="/works/">我的作品</a>
+        <a href="/guestbook/">留言板</a>
+        <a href="/profile/">关于本站</a>
+    </div>
+
+    <div class="welcome">用 户 注 册</div>
+
+    <!-- 注册表单 -->
+    <div class="form-box">
+        <form onsubmit="return false;">
+            <table class="form-table">
+                <tr>
+                    <td class="form-label">用户名:</td>
+                    <td><input type="text" size="26" placeholder="4-16 位字母或数字"></td>
+                </tr>
+                <tr>
+                    <td class="form-label">密&nbsp;&nbsp;码:</td>
+                    <td><input type="password" size="26" placeholder="至少 6 位"></td>
+                </tr>
+                <tr>
+                    <td class="form-label">确认密码:</td>
+                    <td><input type="password" size="26"></td>
+                </tr>
+                <tr>
+                    <td class="form-label">电子邮箱:</td>
+                    <td><input type="email" size="26" placeholder="name@example.com"></td>
+                </tr>
+                <tr>
+                    <td class="form-label">&nbsp;</td>
+                    <td>
+                        <input type="submit" value="提交注册">
+                        <input type="reset" value="重新填写">
+                        <span style="margin-left:10px;">已有账号？<a href="/login.html">去登录</a></span>
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <p class="form-note">※ 本站为静态博客，暂未开通真实的注册功能，此页面仅作展示之用。</p>
+    </div>
+
+    <div class="footer">
+        Copyright &copy; <span id="year">2026年1月-2026年10月</span> YiSen Liu. All rights reserved.
+    </div>
+</div>
+
+<script>
+document.getElementById("year").textContent = "2026年1月-" + new Date().getFullYear() + "年" + (new Date().getMonth() + 1) + "月";
+</script>
+</body>
+</html>

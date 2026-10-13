@@ -1,0 +1,40 @@
+{{ define "main" }}
+
+<!-- 页面标题（复古双线框） -->
+<div class="welcome">软 件 集 锦</div>
+
+{{ if .Content }}
+<div class="section-intro">{{ .Content }}</div>
+{{ end }}
+
+<!-- 子分类：并排分列，每列一个分类 -->
+<div class="cat-cols">
+{{ range .Sections.ByWeight }}
+    <div class="cat-col">
+        <div class="memo-sec"><a href="{{ .RelPermalink }}">{{ .Title }}</a></div>
+        <ul class="cat-list">
+            {{ range .RegularPages.ByDate.Reverse }}
+            <li><a href="{{ .RelPermalink }}">{{ .Title }}</a><span class="cat-date">{{ .Date | dateFormat "2006-01-02" }}</span></li>
+            {{ else }}
+            <li class="center-note">本分类暂无软件。</li>
+            {{ end }}
+        </ul>
+    </div>
+{{ end }}
+</div>
+
+<!-- 直接放在 software 根目录下的散篇文章（正常应为空） -->
+{{ with .RegularPages }}
+<table class="list article-list">
+    {{ range .ByDate.Reverse }}
+    <tr>
+        <td class="list-cat">{{ .Date | dateFormat "2006-01-02" }}:</td>
+        <td class="list-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></td>
+    </tr>
+    {{ end }}
+</table>
+{{ end }}
+
+<p class="back-home"><a href="/">▷ 返回首页</a></p>
+
+{{ end }}

@@ -1,0 +1,38 @@
+{{ define "main" }}
+
+<!-- 页面标题（复古双线框，与首页欢迎语同款） -->
+{{ $ttl := .Title }}
+{{ if eq .Kind "term" }}
+    {{ $ttl = (printf "%s：%s" (cond (eq .Data.Singular "category") "栏目" "标签") .Title) }}
+{{ else if eq .RelPermalink "/posts/" }}
+    {{ $ttl = "全 部 日 志" }}
+{{ else if eq .RelPermalink "/tags/" }}
+    {{ $ttl = "标 签 归 档" }}
+{{ else if eq .RelPermalink "/categories/" }}
+    {{ $ttl = "栏 目 归 档" }}
+{{ end }}
+<div class="welcome">{{ $ttl }}</div>
+
+{{ if and .Content (ne .RelPermalink "/posts/") (ne .RelPermalink "/tags/") (ne .RelPermalink "/categories/") }}
+<div class="section-intro">{{ .Content }}</div>
+{{ end }}
+
+<!-- 文章列表 -->
+{{ $list := .Pages }}
+{{ if eq .RelPermalink "/posts/" }}
+    {{ $list = where .Site.RegularPages "Type" "in" .Site.Params.mainSections }}
+{{ end }}
+<table class="list article-list">
+    {{ range sort $list "Date" "desc" }}
+    <tr>
+        <td class="list-cat">{{ .Date | dateFormat "2006-01-02" }}:</td>
+        <td class="list-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></td>
+    </tr>
+    {{ else }}
+    <tr><td colspan="2" class="center-note">这里还什么都没有。</td></tr>
+    {{ end }}
+</table>
+
+<p class="back-home"><a href="/">▷ 返回首页</a></p>
+
+{{ end }}

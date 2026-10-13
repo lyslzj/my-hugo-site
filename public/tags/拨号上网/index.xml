@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>拨号上网 on 我的个人博客</title>
+		<link>http://localhost:1313/tags/%E6%8B%A8%E5%8F%B7%E4%B8%8A%E7%BD%91/</link>
+		<description>Recent content in 拨号上网 on 我的个人博客</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Fri, 09 Oct 2026 00:00:00 +0000</lastBuildDate>
+		
+			<atom:link href="http://localhost:1313/tags/%E6%8B%A8%E5%8F%B7%E4%B8%8A%E7%BD%91/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>第一次拨号上网</title>
+				<link>http://localhost:1313/memories/first-dial-up/</link>
+				<pubDate>Fri, 09 Oct 2026 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/memories/first-dial-up/</guid>
+				<description>&lt;p&gt;一九九八年的秋天，我在邮局对面的小机房里，第一次&amp;quot;听见&amp;quot;了互联网。&lt;/p&gt;&#xA;&lt;p&gt;那是一间不足二十平米的屋子，四台奔腾二代的机器嗡嗡作响，管理员是个戴袖套的中年人，收五块钱一小时。他替我拨号—— modem 发出一串像水管漏气又像老式电报的怪响，屏幕上字符一跳一跳地爬。等最后一声&amp;quot;嘀&amp;quot;响过，浏览器右上角那个小地球终于转了起来。&lt;/p&gt;&#xA;&lt;p&gt;那天我干什么了，现在完全想不起来。网页慢，图片要一格一格地刷出来，一封带附件的邮件能收十几分钟。但那种感觉记得很牢：一根电话线的那头，真的连着别处。连着图书馆，连着报社，连着大洋彼岸某个我念不出名字的人的电脑。之前它只是杂志上的概念，那一刻它有了声音，有了速度，有了&amp;quot;正在发生&amp;quot;的实感。&lt;/p&gt;&#xA;&lt;p&gt;后来二十年，宽带换了一代又一代，下载从以小时计变成以秒计。我早已习惯这一切，反而常在深夜的机房里想起那五块钱的一小时——那种郑重其事、屏住呼吸的上网姿态，大概一辈子只能有一次。&lt;/p&gt;&#xA;&lt;p&gt;有些技术进步的代价，就是失去了等待的乐趣。这话说得矫情，但我确实是这么想的。&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

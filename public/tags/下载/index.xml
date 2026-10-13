@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>下载 on 我的个人博客</title>
+		<link>http://localhost:1313/tags/%E4%B8%8B%E8%BD%BD/</link>
+		<description>Recent content in 下载 on 我的个人博客</description>
+		<generator>Hugo</generator>
+		<language>zh-cn</language>
+		
+		
+		
+		
+			<lastBuildDate>Fri, 09 Oct 2026 00:00:00 +0000</lastBuildDate>
+		
+			<atom:link href="http://localhost:1313/tags/%E4%B8%8B%E8%BD%BD/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>示例软件：本站下载功能演示</title>
+				<link>http://localhost:1313/software/sample-tool/</link>
+				<pubDate>Fri, 09 Oct 2026 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/software/sample-tool/</guid>
+				<description>&lt;p&gt;这是一篇&lt;strong&gt;示例文章&lt;/strong&gt;，用来演示&amp;quot;软件集锦&amp;quot;栏目的标准写法：上半部分介绍软件，下半部分提供站内直接下载。你可以照着这个模板写自己的软件页，或者直接删掉它换成真实内容。&lt;/p&gt;&#xA;&lt;h2 id=&#34;软件简介&#34;&gt;软件简介&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;名称&lt;/strong&gt;：Sample Tool（示例工具）&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;版本&lt;/strong&gt;：v1.0&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;平台&lt;/strong&gt;：Windows / 跨平台&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;大小&lt;/strong&gt;：约 1 KB（占位文件，非真实程序）&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;说明&lt;/strong&gt;：本压缩包仅用于验证下载链路是否通畅，解压后是一段文字说明。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;功能一览&#34;&gt;功能一览&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;演示 &lt;code&gt;static\downloads\&lt;/code&gt; 目录 → &lt;code&gt;/downloads/文件名&lt;/code&gt; 的映射关系；&lt;/li&gt;&#xA;&lt;li&gt;演示文章内下载按钮的 Markdown 写法；&lt;/li&gt;&#xA;&lt;li&gt;演示版本号命名规范（&lt;code&gt;软件名-v版本.zip&lt;/code&gt;）。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;下载&#34;&gt;下载&lt;/h2&gt;&#xA;&lt;p&gt;&lt;a href=&#34;http://localhost:1313/downloads/sample-tool-v1.0.zip&#34;&gt;▷ 下载 Sample Tool v1.0&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;使用说明给站长的模板备注&#34;&gt;使用说明（给站长的模板备注）&lt;/h2&gt;&#xA;&lt;p&gt;以后发布真实软件时，保留上面结构，把这几处替换即可：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;把软件压缩包放进 [static\downloads](&amp;lt;C:\Users\Administrator\myblog\static\downloads&amp;gt;)，例如 &lt;code&gt;my-tool-v2.1.zip&lt;/code&gt;；&lt;/li&gt;&#xA;&lt;li&gt;下载链接改成 &lt;code&gt;[▷ 下载 My Tool v2.1](/downloads/my-tool-v2.1.zip)&lt;/code&gt;；&lt;/li&gt;&#xA;&lt;li&gt;建议同时附一段校验值或更新日志，方便用户确认版本。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;注意：&lt;code&gt;static&lt;/code&gt; 里的文件会随网站完全公开，只放愿意公开发布的内容；exe 单文件容易被浏览器拦截，打包成 zip 更稳妥。&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

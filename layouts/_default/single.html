@@ -1,0 +1,55 @@
+{{ define "main" }}
+
+<!-- 面包屑 -->
+{{ $inPosts := hasPrefix .RelPermalink "/posts/" }}
+<div class="crumbs">当前位置：<a href="/">首页</a>{{ if $inPosts }} &gt; <a href="/posts/">全部日志</a>{{ end }} &gt; {{ .Title }}</div>
+
+<!-- 文章标题区 -->
+<div class="article-head">
+    <h1 class="article-title">{{ .Title }}</h1>
+    <p class="article-meta">
+        {{ .Date | dateFormat "2006-01-02" }}
+        {{ with .Params.categories }} · {{ range . }}{{ . }}{{ end }}{{ end }}
+        · 阅读约 {{ if ge .ReadingTime 1 }}{{ .ReadingTime }}{{ else }}1{{ end }} 分钟
+    </p>
+</div>
+
+<!-- 正文 -->
+<div class="article-body">
+    {{ .Content }}
+<script src="https://giscus.app/client.js"
+        data-repo="lyslzj/Mysql"
+        data-repo-id="R_kgDOJrhAcQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOJrhAcc4DHeCm"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
+</div>
+
+<!-- 标签 -->
+{{ with .Params.tags }}
+<div class="article-tags">
+    标签：{{ range . }}<a href="/tags/{{ . | urlize }}/">#{{ . }}</a> {{ end }}
+</div>
+{{ end }}
+
+<!-- 上一篇 / 下一篇 -->
+<div class="article-nav">
+    <span>{{ with .PrevInSection }}<a href="{{ .RelPermalink }}">▷ 上一篇：{{ .Title }}</a>{{ else }}已是最新一篇{{ end }}</span>
+    <span>{{ with .NextInSection }}<a href="{{ .RelPermalink }}">下一篇：{{ .Title }} ◁</a>{{ else }}已是最早一篇{{ end }}</span>
+</div>
+
+<!-- 本页访问数 -->
+<div class="article-hits">
+    本文点击数：<span id="busuanzi_value_page_pv">—</span>
+</div>
+
+{{ end }}

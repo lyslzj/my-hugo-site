@@ -1,0 +1,41 @@
+baseURL = 'https://lyslzj.eu.org/'
+locale = 'zh-cn'
+title = '我的个人博客'
+theme = 'terminal'
+
+# 开启文章列表归档
+[outputs]
+  home = ['HTML', 'RSS']
+  page = ['HTML']
+  section = ['HTML']
+
+# 菜单配置
+[menu]
+  [[menu.main]]
+    identifier = "posts"
+    name = "文章"
+    url = "/posts/"
+    weight = 1
+
+  [[menu.main]]
+    identifier = "about"
+    name = "关于我"
+    url = "/about/"
+    weight = 2
+
+# 主题外观参数
+[params]
+  # 终端主题风格参数
+  showMenuItems = 2 # 顶部显示菜单项数量
+  # 首页顶部名言（原创排版使用）
+  motto = "学而不思则罔，思而不学则殆。"
+  mottoAuthor = "孔子"
+  description = "记录技术与生活的点滴"
+  # 内容型栏目（这些文件夹里的文章会汇总进"全部日志"；信息页不在其中）
+  mainSections = ["posts", "memories", "software", "science", "tech", "life", "works"]
+
+# 允许文章 Markdown 中使用原始 HTML（版权说明等页面需要）
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
