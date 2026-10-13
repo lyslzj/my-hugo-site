@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>鼠标键盘共享 on 我的个人博客</title>
-		<link>http://localhost:1313/tags/%E9%BC%A0%E6%A0%87%E9%94%AE%E7%9B%98%E5%85%B1%E4%BA%AB/</link>
+		<link>https://lyslzj.eu.org/tags/%E9%BC%A0%E6%A0%87%E9%94%AE%E7%9B%98%E5%85%B1%E4%BA%AB/</link>
 		<description>Recent content in 鼠标键盘共享 on 我的个人博客</description>
 		<generator>Hugo</generator>
 		<language>zh-cn</language>
@@ -12,13 +12,13 @@
 		
 			<lastBuildDate>Fri, 09 Oct 2026 00:00:00 +0000</lastBuildDate>
 		
-			<atom:link href="http://localhost:1313/tags/%E9%BC%A0%E6%A0%87%E9%94%AE%E7%9B%98%E5%85%B1%E4%BA%AB/index.xml" rel="self" type="application/rss+xml" />
+			<atom:link href="https://lyslzj.eu.org/tags/%E9%BC%A0%E6%A0%87%E9%94%AE%E7%9B%98%E5%85%B1%E4%BA%AB/index.xml" rel="self" type="application/rss+xml" />
 			<item>
 				<title>Mouse Without Borders：一套键鼠控制多台电脑</title>
-				<link>http://localhost:1313/software/network/mouse-without-borders/</link>
+				<link>https://lyslzj.eu.org/software/network/mouse-without-borders/</link>
 				<pubDate>Fri, 09 Oct 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/software/network/mouse-without-borders/</guid>
-				<description>&lt;h2 id=&#34;软件简介&#34;&gt;软件简介&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;名称&lt;/strong&gt;：Mouse Without Borders（无界鼠标）&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;出品&lt;/strong&gt;：微软（Microsoft Garage 项目，免费使用）&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;平台&lt;/strong&gt;：Windows&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;安装包&lt;/strong&gt;：官方安装程序（RAR 压缩包，约 625 KB）&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;同一张局域网里放两三台电脑是常事——一台干活、一台测试、一台留着跑长任务。可桌面空间有限，摆两套键鼠实在占地方。Mouse Without Borders 解决的就是这个问题：&lt;strong&gt;用一套键盘鼠标，直接控制最多 4 台电脑&lt;/strong&gt;。&lt;/p&gt;&#xA;&lt;h2 id=&#34;主要功能&#34;&gt;主要功能&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;跨屏移动&lt;/strong&gt;：鼠标移出本机屏幕边缘，直接进入相邻电脑，就像多显示器一样自然；&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;键盘跟随时切换&lt;/strong&gt;：光标在哪台机器上，键盘输入就到哪台机器；&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;跨机剪贴板&lt;/strong&gt;：文字、图片复制粘贴跨电脑通用，文件也能直接拖拽传输；&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;一键锁屏&lt;/strong&gt;：可以同时锁定/解锁组内所有电脑；&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;配对码连接&lt;/strong&gt;：首次连接用密钥配对，无需复杂配置。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;使用建议&#34;&gt;使用建议&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;几台电脑需在&lt;strong&gt;同一局域网&lt;/strong&gt;，安装后用同一个配对码互相添加即可；&lt;/li&gt;&#xA;&lt;li&gt;屏幕排列顺序可以在设置里自己定义，摆成和实际桌面一致的位置，鼠标过渡才顺手；&lt;/li&gt;&#xA;&lt;li&gt;公司环境注意安全策略是否允许装这类共享输入工具。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;下载&#34;&gt;下载&lt;/h2&gt;&#xA;&lt;p&gt;&lt;a href=&#34;http://localhost:1313/downloads/MouseWithoutBordersSetup.rar&#34;&gt;▷ 下载 Mouse Without Borders 安装包&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;解压后用管理员身份运行安装程序即可。安装完成后按提示在几台机器上分别输入同一配对码，就能开始&amp;quot;一鼠走多机&amp;quot;了。&lt;/p&gt;</description>
+				<guid>https://lyslzj.eu.org/software/network/mouse-without-borders/</guid>
+				<description>&lt;h2 id=&#34;软件简介&#34;&gt;软件简介&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;名称&lt;/strong&gt;：Mouse Without Borders（无界鼠标）&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;出品&lt;/strong&gt;：微软（Microsoft Garage 项目，免费使用）&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;平台&lt;/strong&gt;：Windows&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;安装包&lt;/strong&gt;：官方安装程序（RAR 压缩包，约 625 KB）&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;同一张局域网里放两三台电脑是常事——一台干活、一台测试、一台留着跑长任务。可桌面空间有限，摆两套键鼠实在占地方。Mouse Without Borders 解决的就是这个问题：&lt;strong&gt;用一套键盘鼠标，直接控制最多 4 台电脑&lt;/strong&gt;。&lt;/p&gt;&#xA;&lt;h2 id=&#34;主要功能&#34;&gt;主要功能&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;跨屏移动&lt;/strong&gt;：鼠标移出本机屏幕边缘，直接进入相邻电脑，就像多显示器一样自然；&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;键盘跟随时切换&lt;/strong&gt;：光标在哪台机器上，键盘输入就到哪台机器；&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;跨机剪贴板&lt;/strong&gt;：文字、图片复制粘贴跨电脑通用，文件也能直接拖拽传输；&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;一键锁屏&lt;/strong&gt;：可以同时锁定/解锁组内所有电脑；&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;配对码连接&lt;/strong&gt;：首次连接用密钥配对，无需复杂配置。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;使用建议&#34;&gt;使用建议&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;几台电脑需在&lt;strong&gt;同一局域网&lt;/strong&gt;，安装后用同一个配对码互相添加即可；&lt;/li&gt;&#xA;&lt;li&gt;屏幕排列顺序可以在设置里自己定义，摆成和实际桌面一致的位置，鼠标过渡才顺手；&lt;/li&gt;&#xA;&lt;li&gt;公司环境注意安全策略是否允许装这类共享输入工具。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;下载&#34;&gt;下载&lt;/h2&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://lyslzj.eu.org/downloads/MouseWithoutBordersSetup.rar&#34;&gt;▷ 下载 Mouse Without Borders 安装包&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;解压后用管理员身份运行安装程序即可。安装完成后按提示在几台机器上分别输入同一配对码，就能开始&amp;quot;一鼠走多机&amp;quot;了。&lt;/p&gt;</description>
 			</item>
 	</channel>
 </rss>

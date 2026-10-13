@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>WPS on 我的个人博客</title>
-		<link>http://localhost:1313/tags/wps/</link>
+		<link>https://lyslzj.eu.org/tags/wps/</link>
 		<description>Recent content in WPS on 我的个人博客</description>
 		<generator>Hugo</generator>
 		<language>zh-cn</language>
@@ -12,13 +12,13 @@
 		
 			<lastBuildDate>Fri, 09 Oct 2026 00:00:00 +0000</lastBuildDate>
 		
-			<atom:link href="http://localhost:1313/tags/wps/index.xml" rel="self" type="application/rss+xml" />
+			<atom:link href="https://lyslzj.eu.org/tags/wps/index.xml" rel="self" type="application/rss+xml" />
 			<item>
 				<title>E灵（Excel精灵）：约 270 个功能的 Excel 百宝箱</title>
-				<link>http://localhost:1313/software/office/e-ling-22-2/</link>
+				<link>https://lyslzj.eu.org/software/office/e-ling-22-2/</link>
 				<pubDate>Fri, 09 Oct 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/software/office/e-ling-22-2/</guid>
-				<description>&lt;h2 id=&#34;软件简介&#34;&gt;软件简介&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;名称&lt;/strong&gt;：E灵（Excel精灵，前身&amp;quot;Excel 百宝箱&amp;quot;）&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;版本&lt;/strong&gt;：22.2&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;平台&lt;/strong&gt;：Windows（支持简体中文、繁体中文、英文系统）&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;安装包&lt;/strong&gt;：约 60.6 MB（ZIP）&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;官网&lt;/strong&gt;：excelbbx.net&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;做表格的人都懂：同样的合并、拆分、批量替换，Excel 原生要绕七八步，插件一个按钮就完事。E灵 就是这类&amp;quot;Excel 外挂工具箱&amp;quot;里功能最全的一种——&lt;strong&gt;约 270 个功能&lt;/strong&gt;嵌进 Excel 和 WPS 的菜单栏，把高频操作全部做成一键式。&lt;/p&gt;&#xA;&lt;h2 id=&#34;主要功能&#34;&gt;主要功能&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;报表批处理&lt;/strong&gt;：多表合并、拆分、按条件批量处理，月报年报场景利器；&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;日期 / 财务工具&lt;/strong&gt;：金额小写转大写、日期推算、财务格式一键转换；&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;重复值与选区转换&lt;/strong&gt;：查重、去重、行列转置、文本与数值互转；&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;图片与打印工具&lt;/strong&gt;：批量导入图片、打印标签、分页设置；&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;一键录入公式&lt;/strong&gt;：常用但繁琐的公式（如金额大写转换）一键插入；&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;撤销保护&lt;/strong&gt;：执行单元格命令后仍可 &lt;code&gt;Ctrl+Z&lt;/code&gt; 撤消，不怕误操作毁数据。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;兼容性说明&#34;&gt;兼容性说明&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;支持 Excel 2007 / 2010 / 2013 / 2016 / 2019 / 2021 / 2024 及 Office 365，32 位和 64 位均可；&lt;/li&gt;&#xA;&lt;li&gt;同时支持 WPS；不支持 Office 家庭学生版与精简版；&lt;/li&gt;&#xA;&lt;li&gt;按住 &lt;code&gt;Ctrl&lt;/code&gt; 单击菜单会弹出动画教材，适合新手熟悉各功能。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;安装提示&#34;&gt;安装提示&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;解压后&lt;strong&gt;右键 Setup.exe → 以管理员身份运行&lt;/strong&gt;（直接双击可能被安全软件拦截注册）；&lt;/li&gt;&#xA;&lt;li&gt;安装时若 360/电脑管家提示修改注册表，请点&amp;quot;允许&amp;quot;，否则插件注册不成功；&lt;/li&gt;&#xA;&lt;li&gt;装完打开 Excel 看不到&amp;quot;E灵&amp;quot;菜单的，先确认 Office 版本是否为专业版/企业版。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;下载&#34;&gt;下载&lt;/h2&gt;&#xA;&lt;p&gt;&lt;a href=&#34;http://localhost:1313/downloads/E%E7%81%B5_22.2.zip&#34;&gt;▷ 下载 E灵 v22.2&lt;/a&gt;&lt;/p&gt;</description>
+				<guid>https://lyslzj.eu.org/software/office/e-ling-22-2/</guid>
+				<description>&lt;h2 id=&#34;软件简介&#34;&gt;软件简介&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;名称&lt;/strong&gt;：E灵（Excel精灵，前身&amp;quot;Excel 百宝箱&amp;quot;）&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;版本&lt;/strong&gt;：22.2&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;平台&lt;/strong&gt;：Windows（支持简体中文、繁体中文、英文系统）&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;安装包&lt;/strong&gt;：约 60.6 MB（ZIP）&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;官网&lt;/strong&gt;：excelbbx.net&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;做表格的人都懂：同样的合并、拆分、批量替换，Excel 原生要绕七八步，插件一个按钮就完事。E灵 就是这类&amp;quot;Excel 外挂工具箱&amp;quot;里功能最全的一种——&lt;strong&gt;约 270 个功能&lt;/strong&gt;嵌进 Excel 和 WPS 的菜单栏，把高频操作全部做成一键式。&lt;/p&gt;&#xA;&lt;h2 id=&#34;主要功能&#34;&gt;主要功能&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;报表批处理&lt;/strong&gt;：多表合并、拆分、按条件批量处理，月报年报场景利器；&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;日期 / 财务工具&lt;/strong&gt;：金额小写转大写、日期推算、财务格式一键转换；&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;重复值与选区转换&lt;/strong&gt;：查重、去重、行列转置、文本与数值互转；&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;图片与打印工具&lt;/strong&gt;：批量导入图片、打印标签、分页设置；&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;一键录入公式&lt;/strong&gt;：常用但繁琐的公式（如金额大写转换）一键插入；&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;撤销保护&lt;/strong&gt;：执行单元格命令后仍可 &lt;code&gt;Ctrl+Z&lt;/code&gt; 撤消，不怕误操作毁数据。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;兼容性说明&#34;&gt;兼容性说明&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;支持 Excel 2007 / 2010 / 2013 / 2016 / 2019 / 2021 / 2024 及 Office 365，32 位和 64 位均可；&lt;/li&gt;&#xA;&lt;li&gt;同时支持 WPS；不支持 Office 家庭学生版与精简版；&lt;/li&gt;&#xA;&lt;li&gt;按住 &lt;code&gt;Ctrl&lt;/code&gt; 单击菜单会弹出动画教材，适合新手熟悉各功能。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;安装提示&#34;&gt;安装提示&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;解压后&lt;strong&gt;右键 Setup.exe → 以管理员身份运行&lt;/strong&gt;（直接双击可能被安全软件拦截注册）；&lt;/li&gt;&#xA;&lt;li&gt;安装时若 360/电脑管家提示修改注册表，请点&amp;quot;允许&amp;quot;，否则插件注册不成功；&lt;/li&gt;&#xA;&lt;li&gt;装完打开 Excel 看不到&amp;quot;E灵&amp;quot;菜单的，先确认 Office 版本是否为专业版/企业版。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;下载&#34;&gt;下载&lt;/h2&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://lyslzj.eu.org/downloads/E%E7%81%B5_22.2.zip&#34;&gt;▷ 下载 E灵 v22.2&lt;/a&gt;&lt;/p&gt;</description>
 			</item>
 	</channel>
 </rss>
