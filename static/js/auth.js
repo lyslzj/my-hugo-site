@@ -231,11 +231,146 @@
         }
     }
 
+    /* ================= 邮件链接回调处理（邮箱确认 / 密码恢复） =================
+       当用户点击 Netlify 发的"确认邮箱 / 重置密码"邮件里的链接，会被带回本站，
+       token 会出现在 URL（query 或 hash）。这里读取并处理：
+         - 密码恢复(recovery)：弹出"设置新密码"表单 → 用 token 更新密码
+         - 其他(邮箱确认等)：提示操作成功，引导去登录                            */
+
+    function parseCallbackParams() {
+        var q = location.search.replace(/^\?/, '');
+        var h = location.hash.replace(/^#/, '');
+        var merged = (q ? q + '&' : '') + h;
+        if (!merged) { return null; }
+        var params = {};
+        merged.split('&').forEach(function (kv) {
+            var i = kv.indexOf('=');
+            if (i > 0) { params[decodeURIComponent(kv.slice(0, i))] = decodeURIComponent(kv.slice(i + 1)); }
+        });
+        return params;
+    }
+
+    /* 用恢复 token 更新密码（gotrue：PUT /user + Bearer token） */
+    function setPassword(token, password) {
+        return fetch(API + '/user', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+            body: JSON.stringify({ password: password })
+        }).then(function (r) {
+            if (!r.ok) {
+                return r.json().then(function (j) {
+                    throw new Error((j && (j.msg || j.error_description || j.error)) || ('重置失败（' + r.status + '）'));
+                }).catch(function (e) {
+                    if (e instanceof Error) { throw e; }
+                    throw new Error('重置失败（' + r.status + '）');
+                });
+            }
+            return r.json();
+        });
+    }
+
+    function overlayStyle() {
+        return 'position:fixed;left:0;top:0;right:0;bottom:0;background:rgba(0,0,0,.45);z-index:9999;display:flex;align-items:center;justify-content:center;';
+    }
+
+    /* 密码恢复：弹出"设置新密码"表单 */
+    function showRecoverForm(token) {
+        var div = document.createElement('div');
+        div.style.cssText = overlayStyle();
+        div.innerHTML =
+            '<div class="form-box" style="margin:0 auto;">' +
+            '<div class="welcome">设 置 新 密 码</div>' +
+            '<form id="recover-cb-form">' +
+            '<table class="form-table">' +
+            '<tr><td class="form-label">新密码:</td><td><input type="password" id="recover-cb-pass" size="24" placeholder="至少 6 位"></td></tr>' +
+            '<tr><td class="form-label">确认密码:</td><td><input type="password" id="recover-cb-pass2" size="24"></td></tr>' +
+            '<tr><td class="form-label">&nbsp;</td><td><input type="submit" value="确认重置"></td></tr>' +
+            '</table></form>' +
+            '<p class="form-note" id="recover-cb-msg"></p>' +
+            '</div>';
+        document.body.appendChild(div);
+        document.getElementById('recover-cb-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            var p1 = document.getElementById('recover-cb-pass').value;
+            var p2 = document.getElementById('recover-cb-pass2').value;
+            var m = document.getElementById('recover-cb-msg');
+            if (p1.length < 6) { m.textContent = '密码至少 6 位。'; return; }
+            if (p1 !== p2) { m.textContent = '两次输入的密码不一致。'; return; }
+            m.textContent = '提交中…';
+            setPassword(token, p1).then(function () {
+                m.textContent = '密码已更新，即将前往登录…';
+                setTimeout(function () { location.href = '/login.html'; }, 900);
+            }).catch(function (err) {
+                m.textContent = Auth.errorText(err.message);
+            });
+        });
+    }
+
+    /* 邮箱确认：用 confirmation_token 调用 verify 端点真正完成确认 */
+    function confirmEmail(token) {
+        return fetch(API + '/verify', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ token: token, type: 'signup' })
+        }).then(function (r) {
+            if (!r.ok) {
+                return r.json().then(function (j) {
+                    throw new Error((j && (j.msg || j.error_description || j.error)) || ('验证失败（' + r.status + '）'));
+                }).catch(function (e) {
+                    if (e instanceof Error) { throw e; }
+                    throw new Error('验证失败（' + r.status + '）');
+                });
+            }
+            return r.json();
+        });
+    }
+
+    /* 邮箱确认等其他回调：提示成功并引导登录 */
+    function showCallbackSuccess(message) {
+        var div = document.createElement('div');
+        div.style.cssText = overlayStyle();
+        div.innerHTML =
+            '<div class="form-box" style="margin:0 auto;">' +
+            '<div class="welcome">操 作 结 果</div>' +
+            '<p style="text-align:center;">' + (message || '操作已完成，请前往登录。') + '</p>' +
+            '<p style="text-align:center;"><a href="/login.html">去登录</a></p>' +
+            '</div>';
+        document.body.appendChild(div);
+    }
+
+    function handleAuthCallback() {
+        var p = parseCallbackParams();
+        if (!p) { return; }
+        var recoveryToken = p.recovery_token;
+        var confirmationToken = p.confirmation_token;
+        var otherToken = p.invite_token || p.email_change_token || p.token || p.access_token;
+
+        if (!recoveryToken && !confirmationToken && !otherToken) { return; }
+
+        // 立即从地址栏清掉 token，避免刷新时重复触发
+        history.replaceState(null, '', location.pathname);
+
+        if (recoveryToken) {
+            showRecoverForm(recoveryToken);
+            return;
+        }
+        if (confirmationToken) {
+            confirmEmail(confirmationToken).then(function () {
+                showCallbackSuccess('邮箱验证成功，账号已激活，现在可以登录了。');
+            }).catch(function (err) {
+                showCallbackSuccess('邮箱验证未完成：' + Auth.errorText(err.message));
+            });
+            return;
+        }
+        showCallbackSuccess('操作已完成，请前往登录。');
+    }
+
     function init() {
         window.Auth = Auth;
         bindLogout();
         patchLoginRedirect();
         applyLoginState();
+        handleAuthCallback();
     }
 
     if (document.readyState === 'loading') {
