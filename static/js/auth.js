@@ -62,7 +62,7 @@
         /* 登录：email + password，成功后写入 token 并返回响应
            注意：Netlify Identity 的 token 接口要求 x-www-form-urlencoded 格式 */
         login: function (email, password) {
-            var body = 'grant_type=password&email=' + encodeURIComponent(email) +
+            var body = 'grant_type=password&username=' + encodeURIComponent(email) +
                 '&password=' + encodeURIComponent(password);
             return fetch(API + '/token', {
                 method: 'POST',
