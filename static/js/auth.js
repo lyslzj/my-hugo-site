@@ -59,12 +59,29 @@
         isLoggedIn: isLoggedIn,
         getToken: getToken,
 
-        /* 登录：email + password，成功后写入 token 并返回响应 */
+        /* 登录：email + password，成功后写入 token 并返回响应
+           注意：Netlify Identity 的 token 接口要求 x-www-form-urlencoded 格式 */
         login: function (email, password) {
-            return req('/token', 'POST', {
-                grant_type: 'password',
-                email: email,
-                password: password
+            var body = 'grant_type=password&email=' + encodeURIComponent(email) +
+                '&password=' + encodeURIComponent(password);
+            return fetch(API + '/token', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: body
+            }).then(function (r) {
+                if (!r.ok) {
+                    return r.json().then(function (j) {
+                        var msg = (j && (j.error_description || j.msg || j.error)) || ('登录失败（' + r.status + '）');
+                        var err = new Error(msg);
+                        err.status = r.status;
+                        err.data = j;
+                        throw err;
+                    }).catch(function (e) {
+                        if (e instanceof Error) { throw e; }
+                        throw new Error('登录失败（' + r.status + '）');
+                    });
+                }
+                return r.json();
             }).then(function (data) {
                 if (!data || !data.access_token) { throw new Error('登录响应异常，请重试。'); }
                 setToken(data.access_token);
