@@ -7,6 +7,7 @@
 <meta name="description" content="{{ .Site.Params.description }}">
 <link rel="stylesheet" href="/css/style.css">
 <link href="/index.xml" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}">
+<script src="/js/auth.js" defer></script>
 </head>
 <body>
 <div class="page">
@@ -19,12 +20,20 @@
                 <h2 id="motto"><span class="motto-text">{{ .Site.Params.motto }}</span><span class="motto-author">--{{ .Site.Params.mottoAuthor }}</span></h2>
             </td>
             <td class="head-login" rowspan="2">
-                用户名:<br>
-                <input type="text" size="22"><br><br>
-                密&nbsp;&nbsp;码:<br>
-                <input type="password" size="22"><br><br>
-                <a class="btn" href="/register.html">注册</a>
-                <a class="btn" href="/login.html">登录</a><br><br>
+                <span data-logged-out>
+                    邮&nbsp;&nbsp;箱:<br>
+                    <input type="email" id="head-login-email" size="22"><br><br>
+                    密&nbsp;&nbsp;码:<br>
+                    <input type="password" id="head-login-pass" size="22"><br><br>
+                    <a class="btn" href="javascript:void(0)" id="head-login-btn">登录</a>
+                    <a class="btn" href="/register.html">注册</a><br>
+                    <span class="form-note" id="head-login-msg"></span>
+                </span>
+                <span data-logged-in style="display:none">
+                    欢迎回来：<a data-username>用户</a><br><br>
+                    <a class="btn" href="javascript:void(0)" data-logout>退出登录</a>
+                </span>
+                <br>
                 Search:&nbsp;<input type="search" id="site-search" placeholder="回车搜索本站">
             </td>
         </tr>
@@ -45,6 +54,12 @@
         <a href="/works/">我的作品</a>
         <a href="/guestbook/">留言板</a>
         <a href="/profile/">关于本站</a>
+        <span class="nav-user" data-logged-out>
+            <a href="/login.html">登录</a>&nbsp;/&nbsp;<a href="/register.html">注册</a>
+        </span>
+        <span class="nav-user" data-logged-in style="display:none">
+            <a data-username>用户</a>&nbsp;/&nbsp;<a href="#" data-logout>退出</a>
+        </span>
     </div>
 
     <!-- 欢迎语 -->
@@ -181,6 +196,24 @@
             window.location.href = "https://www.bing.com/search?q=" +
                 encodeURIComponent("site:" + location.hostname + " " + q);
         }
+    });
+})();
+
+/* 首页登录框：邮箱 + 密码，成功后刷新页面 */
+(function () {
+    var btn = document.getElementById("head-login-btn");
+    if (!btn) return;
+    btn.addEventListener("click", function () {
+        var email = document.getElementById("head-login-email").value.trim();
+        var pass = document.getElementById("head-login-pass").value;
+        var msg = document.getElementById("head-login-msg");
+        if (!email || !pass) { if (msg) msg.textContent = "请填写邮箱和密码。"; return; }
+        if (msg) msg.textContent = "登录中…";
+        window.Auth.login(email, pass).then(function () {
+            window.location.reload();
+        }).catch(function (err) {
+            if (msg) msg.textContent = window.Auth.errorText(err.message);
+        });
     });
 })();
 

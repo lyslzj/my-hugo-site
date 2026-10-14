@@ -7,6 +7,7 @@
 <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
 <link rel="stylesheet" href="/css/style.css">
 <link href="/index.xml" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}">
+<script src="/js/auth.js" defer></script>
 </head>
 <body>
 <div class="page">
@@ -23,9 +24,21 @@
         <a href="/works/">我的作品</a>
         <a href="/guestbook/">留言板</a>
         <a href="/profile/">关于本站</a>
+        <span class="nav-user" data-logged-out>
+            <a href="/login.html">登录</a>&nbsp;/&nbsp;<a href="/register.html">注册</a>
+        </span>
+        <span class="nav-user" data-logged-in style="display:none">
+            <a data-username>用户</a>&nbsp;/&nbsp;<a href="#" data-logout>退出</a>
+        </span>
     </div>
 
-    {{ block "main" . }}{{ end }}
+    <div id="gate-main">{{ block "main" . }}{{ end }}</div>
+
+    <!-- 登录门禁提示（受保护栏目未登录时显示） -->
+    <div id="gate-tip" style="display:none" class="form-box">
+        <div class="welcome">该 栏 目 需 登 录 后 查 看</div>
+        <p>此内容仅对登录用户开放，请先<a id="gate-login-link" href="/login.html">登录</a>，或前往<a href="/register.html">注册</a>一个账号。</p>
+    </div>
 
     <!-- 页脚（年份自动更新） -->
     <div class="footer">

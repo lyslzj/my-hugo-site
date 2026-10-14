@@ -5,11 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>用户登录 · 我的个人博客</title>
 <link rel="stylesheet" href="/css/style.css">
+<script src="/js/auth.js" defer></script>
 </head>
 <body>
 <div class="page">
 
-    <!-- 导航条（与首页一致） -->
+    <!-- 导航条（与全站一致） -->
     <div class="menu-bar">
         <a href="/">网站首页</a>
         <a href="/posts/">全部日志</a>
@@ -21,21 +22,27 @@
         <a href="/works/">我的作品</a>
         <a href="/guestbook/">留言板</a>
         <a href="/profile/">关于本站</a>
+        <span class="nav-user" data-logged-out>
+            <a href="/login.html">登录</a>&nbsp;/&nbsp;<a href="/register.html">注册</a>
+        </span>
+        <span class="nav-user" data-logged-in style="display:none">
+            <a data-username>用户</a>&nbsp;/&nbsp;<a href="#" data-logout>退出</a>
+        </span>
     </div>
 
     <div class="welcome">用 户 登 录</div>
 
     <!-- 登录表单 -->
     <div class="form-box">
-        <form onsubmit="return false;">
+        <form id="login-form">
             <table class="form-table">
                 <tr>
-                    <td class="form-label">用户名:</td>
-                    <td><input type="text" size="26"></td>
+                    <td class="form-label">电子邮箱:</td>
+                    <td><input type="email" id="login-email" size="26" placeholder="name@example.com"></td>
                 </tr>
                 <tr>
                     <td class="form-label">密&nbsp;&nbsp;码:</td>
-                    <td><input type="password" size="26"></td>
+                    <td><input type="password" id="login-pass" size="26"></td>
                 </tr>
                 <tr>
                     <td class="form-label">&nbsp;</td>
@@ -46,7 +53,7 @@
                 </tr>
             </table>
         </form>
-        <p class="form-note">※ 本站为静态博客，暂未开通真实的登录功能，此页面仅作展示之用。</p>
+        <p class="form-note" id="login-msg"></p>
     </div>
 
     <div class="footer">
@@ -55,6 +62,28 @@
 </div>
 
 <script>
+(function () {
+    function getParam(name) {
+        var m = new RegExp('[?&]' + name + '=([^&]*)').exec(location.search);
+        return m ? decodeURIComponent(m[1].replace(/\+/g, ' ')) : '';
+    }
+    var form = document.getElementById("login-form");
+    var msg = document.getElementById("login-msg");
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var email = document.getElementById("login-email").value.trim();
+        var pass = document.getElementById("login-pass").value;
+        if (!email || !pass) { msg.textContent = "请填写邮箱和密码。"; return; }
+        msg.textContent = "登录中…";
+        window.Auth.login(email, pass).then(function () {
+            var redir = getParam("redirect");
+            window.location.href = redir || "/";
+        }).catch(function (err) {
+            msg.textContent = window.Auth.errorText(err.message);
+        });
+    });
+})();
+
 document.getElementById("year").textContent = "2026年1月-" + new Date().getFullYear() + "年" + (new Date().getMonth() + 1) + "月";
 </script>
 </body>

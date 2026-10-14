@@ -8,6 +8,9 @@ theme = 'terminal'
   home = ['HTML', 'RSS']
   page = ['HTML']
   section = ['HTML']
+  # 标签/栏目归档页不再生成 RSS，防止受保护文章经由订阅源泄漏
+  taxonomy = ['HTML']
+  term = ['HTML']
 
 # 菜单配置
 [menu]
@@ -32,7 +35,9 @@ theme = 'terminal'
   mottoAuthor = "孔子"
   description = "记录技术与生活的点滴"
   # 内容型栏目（这些文件夹里的文章会汇总进"全部日志"；信息页不在其中）
-  mainSections = ["posts", "memories", "software", "science", "tech", "life", "works"]
+  # 注意：software 与 works 为登录后可见栏目，故意排除在汇总之外，
+  # 避免未登录访客从"全部日志"看到受保护文章的标题和链接
+  mainSections = ["posts", "memories", "science", "tech", "life"]
 
 # 允许文章 Markdown 中使用原始 HTML（版权说明等页面需要）
 [markup]
