@@ -250,7 +250,26 @@
         return params;
     }
 
-    /* 用恢复 token 更新密码（gotrue：PUT /user + Bearer token） */
+    /* 用恢复 token 兑换会话（gotrue：POST /verify type=recovery → 返回 access_token 等 session） */
+    function redeemRecovery(token) {
+        return fetch(API + '/verify', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ token: token, type: 'recovery' })
+        }).then(function (r) {
+            if (!r.ok) {
+                return r.json().then(function (j) {
+                    throw new Error((j && (j.msg || j.error_description || j.error)) || ('恢复失败（' + r.status + '）'));
+                }).catch(function (e) {
+                    if (e instanceof Error) { throw e; }
+                    throw new Error('恢复失败（' + r.status + '）');
+                });
+            }
+            return r.json();
+        });
+    }
+
+    /* 用会话令牌更新密码（gotrue：PUT /user + Bearer access_token） */
     function setPassword(token, password) {
         return fetch(API + '/user', {
             method: 'PUT',
@@ -297,7 +316,11 @@
             if (p1.length < 6) { m.textContent = '密码至少 6 位。'; return; }
             if (p1 !== p2) { m.textContent = '两次输入的密码不一致。'; return; }
             m.textContent = '提交中…';
-            setPassword(token, p1).then(function () {
+            redeemRecovery(token).then(function (session) {
+                var accessToken = session && (session.access_token || session.token);
+                if (!accessToken) { throw new Error('未能获取会话令牌，请重新发起重置。'); }
+                return setPassword(accessToken, p1);
+            }).then(function () {
                 m.textContent = '密码已更新，即将前往登录…';
                 setTimeout(function () { location.href = '/login.html'; }, 900);
             }).catch(function (err) {
