@@ -160,7 +160,7 @@ a.btn:active { border-style: inset; background: #CCCCFF; }
     padding: 18px 22px;
     background: #E7E7F7 url('/images/bg1.gif');
 }
-table.form-table { border-collapse: collapse; width: 100%; }
+table.form-table { border-collapse: collapse; width: auto; margin: 0 auto; }
 table.form-table td { padding: 7px 0; vertical-align: middle; }
 td.form-label { width: 78px; text-align: right; padding-right: 10px; font-weight: bold; }
 .form-box input[type="text"],
@@ -178,6 +178,7 @@ td.form-label { width: 78px; text-align: right; padding-right: 10px; font-weight
 .form-box input[type="submit"]:active,
 .form-box input[type="reset"]:active { border-style: inset; background: #CCCCFF; }
 .form-note { margin: 14px 0 0; color: #800000; text-align: center; }
+.opt-note { font-size: 12px; color: #777; }
 
 /* ---- 文章页（single） ---- */
 .crumbs { padding: 12px 2px 0; color: #444; }
