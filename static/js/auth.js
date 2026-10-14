@@ -120,15 +120,17 @@
         errorText: function (raw) {
             var m = (raw || '').toLowerCase();
             var map = [
+                ['no user found with that email, or password invalid', '邮箱或密码不正确，请核对后重试，或重置密码。'],
+                ['password invalid', '邮箱或密码不正确，请核对后重试。'],
                 ['invalid login credentials', '邮箱或密码不正确。'],
-                ['user not found', '该邮箱尚未注册。'],
-                ['no user found', '该邮箱尚未注册。'],
                 ['email not confirmed', '该邮箱尚未激活，请先完成邮箱验证或等待管理员确认。'],
                 ['signup disabled', '注册功能当前已关闭。'],
                 ['email already in use', '该邮箱已注册，请直接登录。'],
                 ['password should be at least', '密码长度不符合要求（至少 6 位）。'],
                 ['invalid email', '邮箱格式不正确。'],
-                ['signup not confirmed', '注册后需经确认才可登录，请查看邮箱或等待管理员。']
+                ['signup not confirmed', '注册后需经确认才可登录，请查看邮箱或等待管理员。'],
+                ['user not found', '该邮箱尚未注册。'],
+                ['no user found', '该邮箱尚未注册。']
             ];
             for (var i = 0; i < map.length; i++) {
                 if (m.indexOf(map[i][0]) !== -1) { return map[i][1]; }
