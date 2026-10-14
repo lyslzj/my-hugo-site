@@ -81,7 +81,7 @@
 
         msg.textContent = "提交中…";
         window.Auth.signup(email, pass, { full_name: name }).then(function () {
-            msg.textContent = "注册申请已提交。请按站长的设置完成激活（查收验证邮件，或等待管理员在后台确认）后，再前往登录。";
+            msg.textContent = "注册成功！如果网站开启了邮箱验证，请查收邮件并点击确认链接完成激活后再登录；如果未开启，你现在就可以直接登录。";
         }).catch(function (err) {
             msg.textContent = window.Auth.errorText(err.message);
         });
