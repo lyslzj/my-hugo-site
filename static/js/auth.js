@@ -98,6 +98,11 @@
             });
         },
 
+        /* 忘记密码：向邮箱发送重置密码邮件 */
+        recover: function (email) {
+            return req('/recover', 'POST', { email: email });
+        },
+
         /* 退出：清 token，并通知服务端 */
         logout: function () {
             var t = getToken();
