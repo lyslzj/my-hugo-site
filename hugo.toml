@@ -1,5 +1,7 @@
 baseURL = 'https://lyslzj.eu.org/'
 locale = 'zh-cn'
+# CJK：中日韩文字按"字"统计，阅读时长随内容联动
+hasCJKLanguage = true
 title = '我的个人博客'
 theme = 'terminal'
 
