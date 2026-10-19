@@ -5,9 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{{ .Title }} · {{ .Site.Title }}</title>
 <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
-<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/style.css?v={{ if hugo.IsServer }}{{ now.Unix }}{{ else }}20261016{{ end }}">
 <link href="/index.xml" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}">
 <script src="/js/auth.js" defer></script>
+{{ if eq .Section "science" }}<script src="/js/back-to-top.js" defer></script>{{ end }}
 </head>
 <body>
 <div class="page">

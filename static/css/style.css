@@ -198,7 +198,9 @@ td.form-label { width: 78px; text-align: right; padding-right: 10px; font-weight
     line-height: 2;
     font-size: 14px;
 }
-.article-body p { text-indent: 2em; margin: 0 0 12px; }
+/* 段间距：正文行高已是 2 倍，段后只需再留半行（0.5em ≈ 7px）。
+   原来是 12px，段间空白接近一整行，读起来显得过于分散；想更紧凑可改 0.25em。 */
+.article-body p { text-indent: 2em; margin: 0 0 0.5em; }
 .article-body h2 {
     font-size: 18px;
     border-left: 4px solid #6666CC;
@@ -325,3 +327,126 @@ ul.cat-list li .cat-date { display: block; color: #555; font-size: 11px; }
 ul.cat-list li.center-note { border-bottom: none; }
 
 
+
+
+/* ===================== 悬浮卡片样式（2026-10-14 新增） ===================== */
+/* 用法：在文章里写
+   <div class="card">
+     <div class="card-head"><span class="card-date">2026年10月14日</span> <span class="card-tag"># 标签</span></div>
+     正文（HTML 标签或空行后写 Markdown 都行）
+   </div>
+*/
+
+/* 一条内容一张悬浮卡片：圆角 + 阴影 + 淡紫底，像浮在页面上 */
+.article-body .card {
+  background: #E9E4FA;
+  border: 0;
+  border-radius: 16px;
+  padding: 16px 18px;
+  margin: 0 0 20px;
+  box-shadow: 0 5px 14px rgba(0, 0, 0, .18), 0 1px 3px rgba(0, 0, 0, .10);
+}
+.article-body .card > :first-child { margin-top: 0; }
+.article-body .card > :last-child { margin-bottom: 0; }
+
+/* 卡片顶部那一行：日期 + #标签 */
+.article-body .card-head {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0 0 10px;
+  text-indent: 0;
+}
+.article-body .card-date { color: #7B2D8E; }
+.article-body .card-tag  { color: #8A2BE2; }
+
+/* 卡片里的正文：取消全站默认的 2em 首行缩进 */
+.article-body .card p,
+.article-body .card li { text-indent: 0; }
+
+/* 卡片里的图片：去掉 1px 黑框，改成圆角（截图那种） */
+.article-body .card img {
+  display: block;
+  max-width: 100%;
+  margin: 10px auto;
+  border: 0;
+  border-radius: 10px;
+}
+.article-body .card figure { margin: 10px 0; text-indent: 0; }
+.article-body .card figcaption {
+  text-align: center;
+  font-size: 13px;
+  color: #555;
+  text-indent: 0;
+}
+
+/* 可选：整篇文章做成"一张大悬浮卡"——给 article-body 加 class="float-card" 即可 */
+.article-body.float-card {
+  background: #FFFFFF;
+  border: 1px solid #000;
+  border-radius: 16px;
+  padding: 22px 26px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .18);
+}
+
+
+/* ---- 卡片配色微调（2026-10-14，对齐参考图效果） ---- */
+.article-body .card {
+  background: #DED6F7;
+  border-radius: 14px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, .22), 0 1px 3px rgba(0, 0, 0, .12);
+}
+.article-body .card-date { color: #A63A5A; }
+.article-body .card-tag  { color: #7B2D8E; }
+
+
+/* ---- 段落居中：写 <p class="center">文字</p> 即可 ---- */
+.article-body .center { text-align: center; }
+
+
+/* ---- 前言：颜色同文章大标题(.article-title)，字号比正文(.article-body 14px)大一号 ---- */
+.article-body .center {
+  text-align: center;
+  color: #000;        /* = .article-title 的颜色（它未设色，继承 body 的 #000） */
+  font-size: 16px;    /* 正文 14px，大一号 */
+}
+
+/* ---- 卡片标题行（日期 + #标签）字号同样比正文大一号 ---- */
+.article-body .card-head {
+  font-size: 16px;
+}
+
+
+/* ---- 前言与卡片标题行统一改为红棕（2026-10-14） ---- */
+.article-body .center { color: #A63A5A; }        /* 前言 */
+.article-body .card-head { color: #A63A5A; }     /* 标题行整体（含"一、"） */
+.article-body .card-tag { color: #A63A5A; }      /* 标题行里的 #标签 / 人名 */
+
+
+/* ---- 前言与标题行字体一致：同为加粗、16px、红棕、宋体（2026-10-14） ---- */
+.article-body .center {
+  font-weight: bold;       /* 与 .card-head 的 font-weight: bold 保持一致 */
+  font-family: inherit;    /* 同样继承 body 的 "SimSun","宋体",serif */
+  font-size: 16px;
+  color: #A63A5A;
+  text-align: center;
+}
+
+
+/* ---- 卡片里的小图：给 img 加 class="small" 即可缩窄并居中 ---- */
+.article-body .card img.small {
+  width: 260px;        /* 想更小/更大就改这个数 */
+  max-width: 100%;
+  height: auto;
+}
+
+
+/* ---- 卡片底部"回到顶部"链接（由 /js/back-to-top.js 自动注入） ---- */
+.article-body .card .back-to-top {
+  display: block;
+  margin: 14px 0 0;
+  text-align: right;
+  font-size: 13px;
+  color: #7B2D8E;
+  text-decoration: none;
+}
+.article-body .card .back-to-top:hover { text-decoration: underline; }

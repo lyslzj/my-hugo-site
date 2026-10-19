@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{{ .Site.Title }} · 首页</title>
 <meta name="description" content="{{ .Site.Params.description }}">
-<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/style.css?v={{ if hugo.IsServer }}{{ now.Unix }}{{ else }}20261016{{ end }}">
 <link href="/index.xml" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}">
 <script src="/js/auth.js" defer></script>
 </head>
