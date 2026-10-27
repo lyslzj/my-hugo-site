@@ -266,11 +266,40 @@
         }
     }
 
+    /* Netlify 主站（www/apex）只展示公开博客：登录/注册一律跳到 Cloudflare 认证站 */
+    var AUTH_SITE = 'https://whpljy.eu.org';
+    var ON_NETLIFY_HOST = (location.hostname === 'www.lyslzj.eu.org' || location.hostname === 'lyslzj.eu.org');
+
+    function bindJumpToAuthSite() {
+        if (!ON_NETLIFY_HOST) return;
+        var btn = document.getElementById('head-login-btn');
+        if (btn) {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+                location.href = AUTH_SITE + '/login.html';
+            });
+        }
+        var note = document.getElementById('head-login-msg');
+        if (note) note.textContent = '登录后将跳转到会员站。';
+        var links = document.querySelectorAll('a[href="/register.html"], a[href="/login.html"], a[href="/account.html"]');
+        for (var i = 0; i < links.length; i++) {
+            links[i].addEventListener('click', function (e) {
+                e.preventDefault();
+                location.href = AUTH_SITE + this.getAttribute('href');
+            });
+        }
+    }
+
     function init() {
         window.Auth = Auth;
         bindLogout();
         patchLoginRedirect();
-        refresh().then(applyLoginState);
+        if (ON_NETLIFY_HOST) {
+            bindJumpToAuthSite();
+            applyLoginState();
+        } else {
+            refresh().then(applyLoginState);
+        }
     }
 
     if (document.readyState === 'loading') {

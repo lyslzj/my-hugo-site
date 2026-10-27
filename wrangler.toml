@@ -7,12 +7,12 @@ compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = "public"
 
 [vars]
-# 共享 Cookie 的域：www 与 whp 都能读到同一个会话
-COOKIE_DOMAIN = "lyslzj.eu.org"
+# 登录态 Cookie 只设在 Cloudflare 这个域名上（Netlify 主站不需要登录）
+COOKIE_DOMAIN = "whpljy.eu.org"
 # 邮件里链接的兜底域名（注册时优先用请求的 Origin）
-SITE_URL = "https://www.lyslzj.eu.org"
-# 允许的跨源（Netlify 反代过来时 Origin 是 www）
-ALLOWED_ORIGINS = "https://www.lyslzj.eu.org,https://whp.lyslzj.eu.org,https://lyslzj.eu.org,https://myblog-1a2.pages.dev"
+SITE_URL = "https://whpljy.eu.org"
+# 允许的跨源（Cloudflare 站自身 + 预览域）
+ALLOWED_ORIGINS = "https://whpljy.eu.org,https://www.whpljy.eu.org,https://myblog-1a2.pages.dev"
 # PBKDF2-SHA256 迭代次数。免费版 10ms CPU 限制下建议 100000；付费版可提到 210000
 PBKDF2_ITERATIONS = "100000"
 

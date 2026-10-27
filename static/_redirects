@@ -1,0 +1,4 @@
+# 超过 Cloudflare Pages 单文件 25MB 上限的两个安装包，
+# 存在 Cloudflare R2 存储桶 myblog-downloads
+/downloads/E灵_22.2.zip    https://pub-c2876cf0fa474107a14785ede008aa59.r2.dev/E灵_22.2.zip    302
+/downloads/iminiv8.4.21.zip https://pub-c2876cf0fa474107a14785ede008aa59.r2.dev/iminiv8.4.21.zip 302

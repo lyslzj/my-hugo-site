@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{{ .Title }} · {{ .Site.Title }}</title>
+<title>{{ block "title" . }}{{ .Title }} · {{ .Site.Title }}{{ end }}</title>
 <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
 <link rel="stylesheet" href="/css/style.css?v={{ if hugo.IsServer }}{{ now.Unix }}{{ else }}20261016{{ end }}">
 <link href="/index.xml" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}">
@@ -13,7 +13,38 @@
 <body>
 <div class="page">
 
-    <!-- 导航条（与首页一致） -->
+    <!-- 顶部：照片 + 名言（刷新随机） + 登录/搜索 -->
+    <table class="head">
+        <tr>
+            <td class="head-photo"><img src="/43481175784.jpg" width="240" height="150" alt="雪泥鸿爪"></td>
+            <td class="head-quote" rowspan="2">
+                <h2 id="motto"><span class="motto-text">{{ .Site.Params.motto }}</span><span class="motto-author">--{{ .Site.Params.mottoAuthor }}</span></h2>
+            </td>
+            <td class="head-login" rowspan="2">
+                <span data-logged-out>
+                    邮&nbsp;&nbsp;箱:<br>
+                    <input type="email" id="head-login-email" size="22"><br><br>
+                    密&nbsp;&nbsp;码:<br>
+                    <input type="password" id="head-login-pass" size="22"><br><br>
+                    <a class="btn" href="javascript:void(0)" id="head-login-btn">登录</a>
+                    <a class="btn" href="/register.html">注册</a><br>
+                    <span class="form-note" id="head-login-msg"></span>
+                </span>
+                <span data-logged-in style="display:none">
+                    欢迎回来：<a data-username href="/account.html">用户</a><br><br>
+                    <a class="btn" href="/account.html">个人中心</a>
+                    <a class="btn" href="javascript:void(0)" data-logout>退出登录</a>
+                </span>
+                <br>
+                Search:&nbsp;<input type="search" id="site-search" placeholder="回车搜索本站">
+            </td>
+        </tr>
+        <tr>
+            <td class="head-studio"><span class="studio-cn">雪泥鸿爪</span><br><span class="studio-en">Traces in the Snow</span></td>
+        </tr>
+    </table>
+
+    <!-- 导航条 -->
     <div class="menu-bar">
         <a href="/">网站首页</a>
         <a href="/posts/">全部日志</a>
@@ -27,7 +58,46 @@
         <a href="/profile/">关于本站</a>
     </div>
 
-    <div id="gate-main">{{ block "main" . }}{{ end }}</div>
+    <!-- 欢迎语 -->
+    <div class="welcome">欢 迎 访 问 刘 义 森 个 人 主 页</div>
+
+    <!-- 主体：左信息栏 + 右侧各页自己的内容 -->
+    <table class="main">
+        <tr>
+            <!-- 左信息栏（全站通用） -->
+            <td class="meta">
+                <div class="meta-quote">
+                    <p class="q-left" id="side-quote">{{ hugo.Data.site_info.quote }}</p>
+                    <p class="q-right">－<span id="side-quote-author">{{ hugo.Data.site_info.author }}</span></p>
+                </div>
+
+                <div class="meta-date">
+                    <div class="md-week">星期<span id="live-week">日</span> <span id="live-clock"></span></div>
+                    <div class="md-day" id="live-day">1</div>
+                    <div class="md-ym" id="live-ym">二〇二六年十月</div>
+                </div>
+
+                <div class="meta-title"><span>信 息</span></div>
+                <div class="meta-info">
+                    <a href="/posts/">全部日志</a> | <a href="/tags/">标签归档</a><br>
+                    <a href="/profile/">站长简介</a> | <a href="/faq/">常见问题</a><br>
+                    <a href="/copyright/">版权说明</a> | <a href="/contact/">电子信箱</a>
+                </div>
+
+                <div class="meta-title"><span>统 计</span></div>
+                <div class="meta-stats">
+                    自 2026-10-09 以来<br>
+                    本站点击数<br>
+                    <span id="site-pv">—</span>
+                </div>
+            </td>
+
+            <!-- 右侧内容区：各模板自己填 -->
+            <td class="body">
+                {{ block "main" . }}{{ end }}
+            </td>
+        </tr>
+    </table>
 
     <!-- 登录门禁提示（受保护栏目未登录时显示） -->
     <div id="gate-tip" style="display:none" class="form-box">
@@ -35,12 +105,127 @@
         <p>此内容仅对登录用户开放，请先<a id="gate-login-link" href="/login.html">登录</a>，或前往<a href="/register.html">注册</a>一个账号。</p>
     </div>
 
-    <!-- 页脚（年份自动更新） -->
+    <!-- 页脚 -->
     <div class="footer">
         Copyright &copy; 2026年1月-{{ now.Format "2006年1月" }} YiSen Liu. All rights reserved.
     </div>
 
 </div>
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<script>
+/* 名言：每次刷新随机显示两句（顶部 + 左栏），同池抽取且互不重复 */
+(function () {
+    var mottos = [
+        { t: "学而不思则罔，思而不学则殆。", a: "孔子" },
+        { t: "少而好学，如日出之阳；壮而好学，如日中之光；老而好学，如炳烛之明。", a: "刘向" },
+        { t: "除了自己的无知，我什么都不知道。", a: "苏格拉底" },
+        { t: "我思故我在。", a: "笛卡尔" },
+        { t: "千里之行，始于足下。", a: "老子" },
+        { t: "吾生也有涯，而知也无涯。", a: "庄子" },
+        { t: "天才就是百分之一的灵感加上百分之九十九的汗水。", a: "爱迪生" },
+        { t: "预测未来很难，尤其是关于未来的预测。", a: "尼尔斯·玻尔" },
+        { t: "计算机科学里只有两件难事：缓存失效，和给东西起名字。", a: "菲尔·卡尔顿" },
+        { t: "过早优化是万恶之源。", a: "高德纳" },
+        { t: "简单性是可靠的前提。", a: "艾兹格·迪杰斯特拉" },
+        { t: "浪费时间叫虚度，剥用时间叫生活。", a: "扬格" }
+    ];
+    var pool = mottos.slice();
+    for (var i = pool.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var tmp = pool[i]; pool[i] = pool[j]; pool[j] = tmp;
+    }
+    var top = pool[0], side = pool[1];
+    var elT2 = document.querySelector('#motto .motto-text');
+    var elA2 = document.querySelector('#motto .motto-author');
+    if (elT2) elT2.textContent = top.t;
+    if (elA2) elA2.textContent = '--' + top.a;
+    var elT = document.getElementById("side-quote");
+    var elA = document.getElementById("side-quote-author");
+    if (elT) elT.textContent = side.t;
+    if (elA) elA.textContent = side.a;
+})();
+
+/* 顶部搜索：回车跳转到 Bing 站内搜索 */
+(function () {
+    var box = document.getElementById("site-search");
+    if (!box) return;
+    box.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+            var q = box.value.trim();
+            if (!q) return;
+            window.location.href = "https://www.bing.com/search?q=" +
+                encodeURIComponent("site:" + location.hostname + " " + q);
+        }
+    });
+})();
+
+/* 顶栏登录框：邮箱 + 密码，成功后刷新页面 */
+(function () {
+    var btn = document.getElementById("head-login-btn");
+    if (!btn) return;
+    btn.addEventListener("click", function () {
+        var email = document.getElementById("head-login-email").value.trim();
+        var pass = document.getElementById("head-login-pass").value;
+        var msg = document.getElementById("head-login-msg");
+        if (!email || !pass) { if (msg) msg.textContent = "请填写邮箱和密码。"; return; }
+        if (msg) msg.textContent = "登录中…";
+        window.Auth.login(email, pass).then(function () {
+            window.location.reload();
+        }).catch(function (err) {
+            if (msg) msg.textContent = window.Auth.errorText(err.message);
+        });
+    });
+})();
+
+/* 左栏实时日期时间（按访问者本机时间） */
+(function () {
+    var elClock = document.getElementById("live-clock");
+    var elWeek = document.getElementById("live-week");
+    var elDay = document.getElementById("live-day");
+    var elYM = document.getElementById("live-ym");
+    if (!elClock) return;
+    var wds = ["日","一","二","三","四","五","六"];
+    var cns = ["〇","一","二","三","四","五","六","七","八","九"];
+    var months = ["","一","二","三","四","五","六","七","八","九","十","十一","十二"];
+    function pad(n) { return n < 10 ? "0" + n : "" + n; }
+    function tick() {
+        var d = new Date();
+        elClock.textContent = pad(d.getHours()) + ":" + pad(d.getMinutes()) + ":" + pad(d.getSeconds());
+        if (elWeek) elWeek.textContent = wds[d.getDay()];
+        if (elDay) elDay.textContent = d.getDate();
+        if (elYM) {
+            var y = "" + d.getFullYear();
+            var ys = "";
+            for (var i = 0; i < y.length; i++) ys += cns[+y[i]];
+            elYM.textContent = ys + "年" + months[d.getMonth()+1] + "月";
+        }
+    }
+    tick();
+    setInterval(tick, 1000);
+})();
+
+/* 标题过长时悬停滚动 */
+document.querySelectorAll('.scrollTitle').forEach(function (el) {
+    el.addEventListener('mouseover', function () {
+        el._t = setInterval(function () {
+            if (el.scrollLeft + el.clientWidth >= el.scrollWidth) { clearInterval(el._t); return; }
+            el.scrollLeft += 3;
+        }, 30);
+    });
+    el.addEventListener('mouseout', function () {
+        if (el._t) clearInterval(el._t);
+        el.scrollLeft = 0;
+    });
+});
+
+/* 本站点击数：访问一次 +1 */
+fetch('/api/count', { credentials: 'same-origin' })
+  .then(function (r) { return r.json(); })
+  .then(function (d) {
+      var el = document.getElementById('site-pv');
+      if (el && typeof d.pv !== 'undefined') el.textContent = d.pv;
+  })
+  .catch(function () {});
+</script>
 </body>
 </html>
