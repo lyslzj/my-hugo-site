@@ -1,0 +1,22 @@
+# Cloudflare Pages 配置（D1 绑定 + 构建参数）
+# 说明：Git 集成部署时，D1 绑定请在控制台 Settings → Functions → D1 database bindings 里再绑一次；
+#      用 `wrangler pages deploy public` 直传时，这个文件里的绑定会生效。
+name = "myblog"
+compatibility_date = "2026-10-01"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = "public"
+
+[vars]
+# 共享 Cookie 的域：www 与 whp 都能读到同一个会话
+COOKIE_DOMAIN = "lyslzj.eu.org"
+# 邮件里链接的兜底域名（注册时优先用请求的 Origin）
+SITE_URL = "https://www.lyslzj.eu.org"
+# 允许的跨源（Netlify 反代过来时 Origin 是 www）
+ALLOWED_ORIGINS = "https://www.lyslzj.eu.org,https://whp.lyslzj.eu.org,https://lyslzj.eu.org,https://myblog-1a2.pages.dev"
+# PBKDF2-SHA256 迭代次数。免费版 10ms CPU 限制下建议 100000；付费版可提到 210000
+PBKDF2_ITERATIONS = "100000"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "myblog-auth"
+database_id = "31385e45-5c9f-4229-b653-0e9c83b80bd2"

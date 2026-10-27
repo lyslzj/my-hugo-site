@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>邮箱验证 · 我的个人博客</title>
+<link rel="stylesheet" href="/css/style.css?v=20261016">
+<script src="/js/auth.js" defer></script>
+</head>
+<body>
+<div class="page">
+
+    <div class="menu-bar">
+        <a href="/">网站首页</a>
+        <a href="/posts/">全部日志</a>
+        <a href="/memories/">忆昔岁月</a>
+        <a href="/software/">软件集锦</a>
+        <a href="/science/">冰花雪纹</a>
+        <a href="/tech/">技术长廊</a>
+        <a href="/life/">生活随笔</a>
+        <a href="/works/">我的作品</a>
+        <a href="/guestbook/">留言板</a>
+        <a href="/profile/">关于本站</a>
+    </div>
+
+    <div class="welcome">邮 箱 验 证</div>
+
+    <div class="form-box" style="text-align:center;">
+        <p class="form-note" id="verify-msg">正在验证…</p>
+        <p><a href="/login.html" id="verify-login" style="display:none;">前往登录</a></p>
+    </div>
+
+    <div class="footer">
+        Copyright &copy; <span id="year">2026年1月-2026年10月</span> YiSen Liu. All rights reserved.
+    </div>
+</div>
+
+<script>
+window.addEventListener("load", function () {
+    var msg = document.getElementById("verify-msg");
+    var login = document.getElementById("verify-login");
+    var params = new URLSearchParams(location.search);
+    var status = params.get("status");
+    var token = params.get("token");
+
+    function fallback(text) {
+        msg.textContent = text;
+        login.style.display = "";
+    }
+
+    if (status === "invalid") {
+        fallback("验证链接无效或已过期。请重新登录，然后点击“重新发送验证邮件”。");
+        return;
+    }
+    if (status === "error") {
+        fallback("验证服务暂时不可用，请稍后重试。");
+        return;
+    }
+    if (!token) {
+        fallback("链接缺少验证参数。");
+        return;
+    }
+
+    window.Auth.verify(token).then(function () {
+        msg.textContent = "验证成功，正在进入首页…";
+        setTimeout(function () { location.href = "/"; }, 800);
+    }).catch(function (err) {
+        fallback(window.Auth.errorText(err.message) + "（可返回登录页重新发送验证邮件）");
+    });
+});
+
+document.getElementById("year").textContent = "2026年1月-" + new Date().getFullYear() + "年" + (new Date().getMonth() + 1) + "月";
+</script>
+</body>
+</html>

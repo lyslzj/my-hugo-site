@@ -1,0 +1,6 @@
+# 受保护栏目禁止被 CDN/代理缓存，避免登录后内容被缓存给未登录访客
+/software/*
+  Cache-Control: no-store
+
+/works/*
+  Cache-Control: no-store

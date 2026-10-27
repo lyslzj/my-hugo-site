@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>个人中心 · 我的个人博客</title>
+<link rel="stylesheet" href="/css/style.css?v=20261016">
+<script src="/js/auth.js" defer></script>
+</head>
+<body>
+<div class="page">
+
+    <div class="menu-bar">
+        <a href="/">网站首页</a>
+        <a href="/posts/">全部日志</a>
+        <a href="/memories/">忆昔岁月</a>
+        <a href="/software/">软件集锦</a>
+        <a href="/science/">冰花雪纹</a>
+        <a href="/tech/">技术长廊</a>
+        <a href="/life/">生活随笔</a>
+        <a href="/works/">我的作品</a>
+        <a href="/guestbook/">留言板</a>
+        <a href="/profile/">关于本站</a>
+    </div>
+
+    <div class="welcome">个 人 中 心</div>
+
+    <div class="form-box" id="account-box" style="display:none">
+        <table class="form-table">
+            <tr>
+                <td class="form-label">电子邮箱:</td>
+                <td><span id="acc-email"></span> <span class="form-note" id="acc-verify"></span></td>
+            </tr>
+            <tr>
+                <td class="form-label">昵&nbsp;&nbsp;称:</td>
+                <td>
+                    <input type="text" id="acc-name" size="26" maxlength="40" placeholder="登录后显示的名称">
+                    <input type="button" id="acc-save" value="保存昵称">
+                </td>
+            </tr>
+        </table>
+        <p class="form-note" id="acc-msg"></p>
+        <p><a href="javascript:void(0)" id="acc-logout">退出登录</a></p>
+    </div>
+
+    <div class="form-box" id="password-box" style="display:none">
+        <div class="welcome">修 改 密 码</div>
+        <form id="pwd-form">
+            <table class="form-table">
+                <tr>
+                    <td class="form-label">当前密码:</td>
+                    <td><input type="password" id="pwd-cur" size="26"></td>
+                </tr>
+                <tr>
+                    <td class="form-label">新密码:</td>
+                    <td><input type="password" id="pwd-new" size="26" placeholder="至少 8 位"></td>
+                </tr>
+                <tr>
+                    <td class="form-label">确认新密码:</td>
+                    <td><input type="password" id="pwd-new2" size="26"></td>
+                </tr>
+                <tr>
+                    <td class="form-label">&nbsp;</td>
+                    <td><input type="submit" value="修改密码"></td>
+                </tr>
+            </table>
+        </form>
+        <p class="form-note" id="pwd-msg"></p>
+    </div>
+
+    <div class="footer">
+        Copyright &copy; <span id="year">2026年1月-2026年10月</span> YiSen Liu. All rights reserved.
+    </div>
+</div>
+
+<script>
+window.addEventListener("load", function () {
+    var box = document.getElementById("account-box");
+    var pwdBox = document.getElementById("password-box");
+    var msg = document.getElementById("acc-msg");
+
+    window.Auth.refresh().then(function (user) {
+        if (!user) {
+            location.href = "/login.html?redirect=" + encodeURIComponent("/account.html");
+            return;
+        }
+        box.style.display = "";
+        pwdBox.style.display = "";
+        document.getElementById("acc-email").textContent = user.email;
+        document.getElementById("acc-name").value = user.name || "";
+        document.getElementById("acc-verify").textContent = user.email_verified
+            ? "（已验证）"
+            : "（未验证，请查收验证邮件）";
+    }).catch(function () {
+        location.href = "/login.html?redirect=" + encodeURIComponent("/account.html");
+    });
+
+    document.getElementById("acc-save").addEventListener("click", function () {
+        var name = document.getElementById("acc-name").value.trim();
+        msg.textContent = "保存中…";
+        window.Auth.updateProfile(name).then(function () {
+            msg.textContent = "昵称已更新。";
+        }).catch(function (err) {
+            msg.textContent = window.Auth.errorText(err.message);
+        });
+    });
+
+    document.getElementById("acc-logout").addEventListener("click", function () {
+        window.Auth.logout().then(function () { location.href = "/"; });
+    });
+
+    document.getElementById("pwd-form").addEventListener("submit", function (e) {
+        e.preventDefault();
+        var pmsg = document.getElementById("pwd-msg");
+        var cur = document.getElementById("pwd-cur").value;
+        var n1 = document.getElementById("pwd-new").value;
+        var n2 = document.getElementById("pwd-new2").value;
+
+        if (!cur) { pmsg.textContent = "请输入当前密码。"; return; }
+        if (n1.length < 8) { pmsg.textContent = "新密码至少 8 位。"; return; }
+        if (n1 !== n2) { pmsg.textContent = "两次输入的新密码不一致。"; return; }
+
+        pmsg.textContent = "提交中…";
+        window.Auth.changePassword(cur, n1).then(function () {
+            pmsg.textContent = "密码已修改，其他设备已下线。";
+            document.getElementById("pwd-form").reset();
+        }).catch(function (err) {
+            pmsg.textContent = window.Auth.errorText(err.message);
+        });
+    });
+});
+
+document.getElementById("year").textContent = "2026年1月-" + new Date().getFullYear() + "年" + (new Date().getMonth() + 1) + "月";
+</script>
+</body>
+</html>

@@ -83,6 +83,11 @@
     }
     var form = document.getElementById("login-form");
     var msg = document.getElementById("login-msg");
+
+    if (getParam("verified") === "1") {
+        msg.textContent = "邮箱验证成功，请登录。";
+    }
+
     form.addEventListener("submit", function (e) {
         e.preventDefault();
         var email = document.getElementById("login-email").value.trim();
@@ -91,9 +96,28 @@
         msg.textContent = "登录中…";
         window.Auth.login(email, pass).then(function () {
             var redir = getParam("redirect");
-            window.location.href = redir || "/";
+            if (!redir || redir.charAt(0) !== "/" || redir.charAt(1) === "/" || redir.charAt(1) === "\\") {
+                redir = "/";
+            }
+            window.location.href = redir;
         }).catch(function (err) {
             msg.textContent = window.Auth.errorText(err.message);
+            if (err.code === "EMAIL_UNVERIFIED") {
+                var resend = document.createElement("a");
+                resend.href = "javascript:void(0)";
+                resend.textContent = " 点此重新发送验证邮件";
+                resend.addEventListener("click", function () {
+                    msg.textContent = "发送中…";
+                    window.Auth.resend(email).then(function (res) {
+                        msg.textContent = res && res.sent
+                            ? "验证邮件已重新发送，请查收邮箱。"
+                            : "发送过于频繁或邮件服务未配置，请稍后再试。";
+                    }).catch(function (e2) {
+                        msg.textContent = window.Auth.errorText(e2.message);
+                    });
+                });
+                msg.appendChild(resend);
+            }
         });
     });
 
@@ -121,8 +145,12 @@
             var rmsg = document.getElementById("recover-msg");
             if (!email) { rmsg.textContent = "请输入注册邮箱。"; return; }
             rmsg.textContent = "发送中…";
-            window.Auth.recover(email).then(function () {
-                rmsg.textContent = "重置邮件已发送到 " + email + "，请查收邮箱（注意垃圾箱），按邮件里的链接设置新密码后再登录。";
+            window.Auth.recover(email).then(function (res) {
+                if (res && res.mailer === false) {
+                    rmsg.textContent = "站点尚未配置邮件服务，暂时无法发送重置邮件，请联系站长处理。";
+                    return;
+                }
+                rmsg.textContent = "如果该邮箱已注册，重置邮件会发送到 " + email + "，请查收（注意垃圾箱），按邮件里的链接设置新密码后再登录。";
             }).catch(function (err) {
                 rmsg.textContent = window.Auth.errorText(err.message);
             });

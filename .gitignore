@@ -8,3 +8,9 @@ node_modules/
 /deploy.ps1
 /发布博客.bat
 /博客自动发布-任务计划.xml
+# Cloudflare local deploy tools (machine-specific paths)
+/deploy-cf.ps1
+/发布到Cloudflare.bat
+/.wrangler/
+/.deploy-cf-tmp/
+/.deploy-cf-tmp*/

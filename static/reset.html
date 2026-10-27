@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>重置密码 · 我的个人博客</title>
+<link rel="stylesheet" href="/css/style.css?v=20261016">
+<script src="/js/auth.js" defer></script>
+</head>
+<body>
+<div class="page">
+
+    <div class="menu-bar">
+        <a href="/">网站首页</a>
+        <a href="/posts/">全部日志</a>
+        <a href="/memories/">忆昔岁月</a>
+        <a href="/software/">软件集锦</a>
+        <a href="/science/">冰花雪纹</a>
+        <a href="/tech/">技术长廊</a>
+        <a href="/life/">生活随笔</a>
+        <a href="/works/">我的作品</a>
+        <a href="/guestbook/">留言板</a>
+        <a href="/profile/">关于本站</a>
+    </div>
+
+    <div class="welcome">重 置 密 码</div>
+
+    <div class="form-box" id="reset-box">
+        <form id="reset-form">
+            <table class="form-table">
+                <tr>
+                    <td class="form-label">新密码:</td>
+                    <td><input type="password" id="reset-pass" size="26" placeholder="至少 8 位"></td>
+                </tr>
+                <tr>
+                    <td class="form-label">确认密码:</td>
+                    <td><input type="password" id="reset-pass2" size="26"></td>
+                </tr>
+                <tr>
+                    <td class="form-label">&nbsp;</td>
+                    <td><input type="submit" value="确认重置"></td>
+                </tr>
+            </table>
+        </form>
+        <p class="form-note" id="reset-msg"></p>
+    </div>
+
+    <div class="footer">
+        Copyright &copy; <span id="year">2026年1月-2026年10月</span> YiSen Liu. All rights reserved.
+    </div>
+</div>
+
+<script>
+window.addEventListener("load", function () {
+    var form = document.getElementById("reset-form");
+    var msg = document.getElementById("reset-msg");
+    var token = new URLSearchParams(location.search).get("token") || "";
+
+    if (!token) {
+        form.style.display = "none";
+        msg.textContent = "链接缺少参数，请从重置邮件里重新打开。";
+        return;
+    }
+
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var p1 = document.getElementById("reset-pass").value;
+        var p2 = document.getElementById("reset-pass2").value;
+
+        if (p1.length < 8) { msg.textContent = "密码至少 8 位。"; return; }
+        if (p1 !== p2) { msg.textContent = "两次输入的密码不一致。"; return; }
+
+        msg.textContent = "提交中…";
+        window.Auth.reset(token, p1).then(function () {
+            msg.textContent = "密码已更新，即将前往登录…";
+            setTimeout(function () { location.href = "/login.html"; }, 900);
+        }).catch(function (err) {
+            msg.textContent = window.Auth.errorText(err.message);
+        });
+    });
+});
+
+document.getElementById("year").textContent = "2026年1月-" + new Date().getFullYear() + "年" + (new Date().getMonth() + 1) + "月";
+</script>
+</body>
+</html>

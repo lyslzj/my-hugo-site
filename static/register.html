@@ -36,7 +36,7 @@
                 </tr>
                 <tr>
                     <td class="form-label">密&nbsp;&nbsp;码:</td>
-                    <td><input type="password" id="reg-pass" size="26" placeholder="至少 6 位"></td>
+                    <td><input type="password" id="reg-pass" size="26" placeholder="至少 8 位"></td>
                 </tr>
                 <tr>
                     <td class="form-label">确认密码:</td>
@@ -55,6 +55,7 @@
                     </td>
                 </tr>
             </table>
+            <div id="turnstile-slot" style="margin:10px 0;"></div>
         </form>
         <p class="form-note" id="reg-msg"></p>
     </div>
@@ -77,14 +78,27 @@
 
         if (!email || !pass || !pass2) { msg.textContent = "请填写邮箱和密码。"; return; }
         if (pass !== pass2) { msg.textContent = "两次输入的密码不一致。"; return; }
-        if (pass.length < 6) { msg.textContent = "密码至少 6 位。"; return; }
+        if (pass.length < 8) { msg.textContent = "密码至少 8 位。"; return; }
 
         msg.textContent = "提交中…";
-        window.Auth.signup(email, pass, { full_name: name }).then(function () {
-            msg.textContent = "注册成功！如果网站开启了邮箱验证，请查收邮件并点击确认链接完成激活后再登录；如果未开启，你现在就可以直接登录。";
+        window.Auth.signup(email, pass, { full_name: name }, window.Auth.turnstileToken()).then(function (res) {
+            if (res && res.verifyRequired) {
+                if (res.mailSent === false) {
+                    msg.textContent = "注册成功，但验证邮件发送失败。请到登录页登录时点击“重新发送验证邮件”，或联系站长。";
+                } else {
+                    msg.textContent = "注册成功！验证邮件已发送到 " + email + "，请查收并点击链接完成验证（注意垃圾箱），验证后会自动登录。";
+                }
+            } else {
+                msg.textContent = "注册成功，现在可以登录了。";
+            }
         }).catch(function (err) {
             msg.textContent = window.Auth.errorText(err.message);
         });
+    });
+    window.addEventListener("load", function () {
+        if (window.Auth && window.Auth.mountTurnstile) {
+            window.Auth.mountTurnstile(document.getElementById("turnstile-slot"));
+        }
     });
 })();
 
