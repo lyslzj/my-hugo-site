@@ -28,4 +28,4 @@ draft: false
 - 由于自身条件限制，未有效果图；
 - 随着年龄增长，基于需求，后来慢慢接触学习效果图的制作。
 
-<p style="text-align:center;">本文内容只是一个参考，不作他用。</p>
+<blockquote style="text-align:center;">本文内容只是一个参考，不作他用。</blockquote>
