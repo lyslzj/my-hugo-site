@@ -39,4 +39,4 @@ draft = false
 
 ## 下载
 
-[▷ 下载 E灵 v22.2](/downloads/E灵_22.2.zip)
+[▷ 下载 E灵 v22.2](https://raw.githubusercontent.com/lyslzj/my-hugo-site/main/downloads/E灵_22.2.zip)

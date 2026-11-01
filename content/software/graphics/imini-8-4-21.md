@@ -41,4 +41,4 @@ draft = false
 
 ## 下载
 
-[▷ 下载 iMini 迷你建筑工具箱 v8.4.21](/downloads/iminiv8.4.21.zip)
+[▷ 下载 iMini 迷你建筑工具箱 v8.4.21](https://raw.githubusercontent.com/lyslzj/my-hugo-site/main/downloads/iminiv8.4.21.zip)

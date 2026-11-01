@@ -10,6 +10,9 @@ node_modules/
 /博客自动发布-任务计划.xml
 # Cloudflare local deploy tools (machine-specific paths)
 /deploy-cf.ps1
+
+# 超过 25MiB 的安装包（Pages 不能部署，本地留底，发布走 GitHub Releases）
+/downloads_backup/
 /发布到Cloudflare.bat
 /.wrangler/
 /.deploy-cf-tmp/
