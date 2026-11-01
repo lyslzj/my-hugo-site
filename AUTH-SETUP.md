@@ -123,6 +123,57 @@ static/_headers         # 受保护栏目 no-store，防止 CDN/反代缓存
 - 修改密码（`POST /api/auth/password`，需当前密码，成功后其他设备下线）
 
 
+## GitHub 一键登录（可选增强）
+
+在邮箱密码之外，访客可以用 GitHub 账号直接登录，登录后同样能访问
+`/software/`、`/works/` 受保护栏目。
+
+### 1. 建表（跑一次迁移）
+
+```bash
+npx wrangler d1 execute myblog-auth --remote --file=./migrations/0002_github_oauth.sql
+```
+
+### 2. 注册 GitHub OAuth App
+
+到 https://github.com/settings/developers → **New OAuth App**：
+
+- **Application name**：随便填，如 `我的博客登录`
+- **Homepage URL**：`https://whpljy.eu.org`
+- **Authorization callback URL**：`https://whpljy.eu.org/api/auth/github/callback`
+
+创建后拿到 **Client ID**，点 **Generate a new client secret** 生成 Client Secret。
+
+### 3. 配环境变量
+
+Cloudflare Pages → Settings → Environment variables，新增：
+
+| 变量 | 值 |
+|---|---|
+| `GITHUB_CLIENT_ID` | `Iv1.xxxxxxxx` |
+| `GITHUB_CLIENT_SECRET` | （Secret，加密存储） |
+
+### 4. 重新部署
+
+推一次代码即可。按钮出现在：
+
+- 首页右上角登录框（登录 / 注册下方）
+- 文章页评论区下方（未登录时居中显示，登录后自动隐藏）
+- `/login.html` 登录表单下方
+
+### 登录后行为
+
+- 同一 GitHub 邮箱若已注册本站账号，自动绑定到原账号；否则新建账号
+  （GitHub 已验证邮箱，故 `email_verified=1`，不用再收验证邮件）
+- 会话 Cookie 与邮箱密码登录完全相同，受保护栏目服务端门禁自动放行
+
+### 注意
+
+- 评论本身由 giscus 提供，giscus 用的是它自己的 GitHub 授权（评论框内那个绿色按钮），
+  和本站登录是两套独立身份；本站 GitHub 登录只负责“进网站看受保护内容”。
+- 回调地址必须与 OAuth App 里登记的完全一致；以后换域名要两边一起改。
+
+
 ## 可选项
 
 - **Turnstile**：到 Cloudflare 控制台建一个 Turnstile 站点，把 site key 填到

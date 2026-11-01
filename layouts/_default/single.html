@@ -17,21 +17,24 @@
 <!-- 正文 -->
 <div class="article-body">
     {{ .Content }}
-<script src="https://giscus.app/client.js"
-        data-repo="lyslzj/Mysql"
-        data-repo-id="R_kgDOJrhAcQ"
-        data-category="Announcements"
-        data-category-id="DIC_kwDOJrhAcc4DHeCm"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="bottom"
-        data-theme="preferred_color_scheme"
-        data-lang="zh-CN"
-        crossorigin="anonymous"
-        async>
-</script>
+
+    <!-- 评论区：本站登录后可直接发表；未登录只显示 GitHub 登录按钮 -->
+    <div id="comment-app" data-path="{{ .RelPermalink }}">
+        <div class="comment-title"><span id="comment-count">评论</span></div>
+        <div id="comment-list"></div>
+
+        <div data-logged-in class="comment-editor" style="display:none">
+            <textarea id="comment-text" rows="4" placeholder="发表你的评论…"></textarea>
+            <div class="comment-editor-bar">
+                <button type="button" class="btn" id="comment-submit">发表评论</button>
+                <span class="form-note" id="comment-msg"></span>
+            </div>
+        </div>
+
+        <div data-logged-out class="comment-github">
+            <a class="btn btn-github" href="/api/auth/github"><svg class="gh-mark" viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.7-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>使用 GitHub 登录后评论</a>
+        </div>
+    </div>
 </div>
 
 <!-- 标签 -->
@@ -51,5 +54,7 @@
 <div class="article-hits">
     本文点击数：<span id="busuanzi_value_page_pv">—</span>
 </div>
+
+<script src="/js/comments.js?v=20261028f" defer></script>
 
 {{ end }}

@@ -11,7 +11,15 @@
 {{ else if eq .RelPermalink "/categories/" }}
     {{ $ttl = "栏 目 归 档" }}
 {{ end }}
+{{ if eq .RelPermalink "/works/" }}
+<!-- 作品集封面横幅：花环圆盘图 + 叠加标题文字 -->
+<div class="works-cover">
+    <div class="works-cover-title">{{ $ttl }}</div>
+    {{ with .Params.subtitle }}<div class="works-cover-sub">{{ . }}</div>{{ end }}
+</div>
+{{ else }}
 <div class="welcome">{{ $ttl }}</div>
+{{ end }}
 
 {{ if and .Content (ne .RelPermalink "/posts/") (ne .RelPermalink "/tags/") (ne .RelPermalink "/categories/") }}
 <div class="section-intro">{{ .Content }}</div>

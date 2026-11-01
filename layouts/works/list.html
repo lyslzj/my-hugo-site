@@ -1,0 +1,69 @@
+{{ define "main" }}
+
+{{ $ttl := .Title }}
+{{ if eq .RelPermalink "/works/" }}
+
+<!-- 作品集封面横幅：花环圆盘图 + 叠加标题文字 -->
+<div class="works-cover">
+    <div class="works-cover-title">{{ $ttl }}</div>
+    {{ with .Params.subtitle }}<div class="works-cover-sub">{{ . }}</div>{{ end }}
+</div>
+
+{{ if .Content }}
+<div class="section-intro">{{ .Content }}</div>
+{{ end }}
+
+<!-- 子栏目：并排两栏，各带绿底标题框 -->
+<div class="cat-cols works-cols">
+{{ range .Sections.ByWeight }}
+    <div class="cat-col">
+        <div class="memo-sec"><a href="{{ .RelPermalink }}">{{ .Title }}</a></div>
+        <ul class="cat-list">
+            {{ range .RegularPages.ByDate.Reverse }}
+            <li><a href="{{ .RelPermalink }}">{{ .Title }}</a><span class="cat-date">{{ .Date | dateFormat "2006-01-02" }}</span></li>
+            {{ else }}
+            <li class="center-note">本栏目暂无作品。</li>
+            {{ end }}
+        </ul>
+    </div>
+{{ end }}
+</div>
+
+<!-- 直接放在 works 根目录下的散篇文章（正常应为空） -->
+{{ with .RegularPages }}
+<table class="list article-list">
+    {{ range .ByDate.Reverse }}
+    <tr>
+        <td class="list-cat">{{ .Date | dateFormat "2006-01-02" }}:</td>
+        <td class="list-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></td>
+    </tr>
+    {{ end }}
+</table>
+{{ end }}
+
+<p class="back-home"><a href="/">▷ 返回首页</a></p>
+
+{{ else }}
+<!-- 子栏目页（建筑作品集 / 书法作品集）：普通文章列表 -->
+<div class="welcome">{{ $ttl }}</div>
+
+{{ if .Content }}
+<div class="section-intro">{{ .Content }}</div>
+{{ end }}
+
+<table class="list article-list">
+    {{ range .Pages.ByDate.Reverse }}
+    <tr>
+        <td class="list-cat">{{ .Date | dateFormat "2006-01-02" }}:</td>
+        <td class="list-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></td>
+    </tr>
+    {{ else }}
+    <tr><td colspan="2" class="center-note">本栏目暂无作品。</td></tr>
+    {{ end }}
+</table>
+
+<p class="back-home"><a href="/works/">▷ 返回我的作品</a></p>
+
+{{ end }}
+
+{{ end }}

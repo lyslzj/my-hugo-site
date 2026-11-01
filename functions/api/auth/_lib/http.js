@@ -70,9 +70,6 @@ export function publicOrigin(request, env) {
 
 // 在 lyslzj.eu.org 及其子域上共享会话（www / whp 通用）；其他域名（如 pages.dev 预览）退回 host-only
 export function sessionCookie(env, request, token, maxAge) {
-  const host = new URL(request.url).hostname;
-  const domain = String(env.COOKIE_DOMAIN || 'lyslzj.eu.org').replace(/^\./, '');
-  const useDomain = host === domain || host.endsWith('.' + domain);
   const parts = [
     'blog_session=' + token,
     'Path=/',
@@ -81,7 +78,6 @@ export function sessionCookie(env, request, token, maxAge) {
     'SameSite=Lax',
     'Max-Age=' + maxAge
   ];
-  if (useDomain) parts.push('Domain=' + domain);
   return parts.join('; ');
 }
 

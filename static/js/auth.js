@@ -144,6 +144,18 @@
             return request('/logout', { method: 'POST' }).then(done).catch(done);
         },
 
+        /* 跳到 GitHub OAuth 登录入口；登录成功后回到 redirect 所在页 */
+        githubLoginUrl: function (redirect) {
+            var redir = redirect || (location.pathname + location.search);
+            var path = '/api/auth/github?redirect=' + encodeURIComponent(redir);
+            if (ON_NETLIFY_HOST) return AUTH_SITE + path;
+            return path;
+        },
+
+        githubLogin: function (redirect) {
+            location.href = Auth.githubLoginUrl(redirect);
+        },
+
         getCurrentUser: function () {
             return refresh().then(function (user) {
                 if (!user) throw new Error('未登录');
@@ -259,6 +271,36 @@
         }
     }
 
+    /* 所有带 data-github-login 的按钮：统一跳 GitHub OAuth 登录 */
+    function bindGithubButtons() {
+        var btns = document.querySelectorAll('[data-github-login]');
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].addEventListener('click', function (e) {
+                e.preventDefault();
+                Auth.githubLogin();
+            });
+        }
+    }
+
+    /* 立即对外暴露 Auth 并绑定 GitHub 按钮（不依赖 init 时机，避免脚本加载后按钮无响应） */
+    window.Auth = Auth;
+    function bindGithubNow() { bindGithubButtons(); }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', bindGithubNow);
+    } else {
+        bindGithubNow();
+    }
+
+    /* OAuth 失败时回调会把错误放进 location.hash，这里读出来显示到登录框提示位 */
+    function showOAuthError() {
+        var m = /github_login_error=([^&]+)/.exec(location.hash || '');
+        if (!m) return;
+        var msg = decodeURIComponent(m[1]);
+        var note = document.getElementById('head-login-msg') || document.getElementById('login-msg');
+        if (note) note.textContent = msg;
+        if (history.replaceState) history.replaceState(null, '', location.pathname + location.search);
+    }
+
     function patchLoginRedirect() {
         var link = document.getElementById('gate-login-link');
         if (link) {
@@ -293,6 +335,8 @@
     function init() {
         window.Auth = Auth;
         bindLogout();
+        bindGithubButtons();
+        showOAuthError();
         patchLoginRedirect();
         if (ON_NETLIFY_HOST) {
             bindJumpToAuthSite();
