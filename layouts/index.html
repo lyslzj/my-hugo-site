@@ -14,7 +14,7 @@
 
                 <table class="list">
                     <tr><td colspan="2" class="section-header">随机文选</td></tr>
-                    {{ range hugo.Data.random_content }}
+                    {{ range site.Data.random_content }}
                     <tr>
                         <td class="list-cat">{{ .category }}:</td>
                         <td class="list-title"><div class="scrollTitle"><a href="{{ .url }}">{{ .title }}</a></div></td>
@@ -32,7 +32,7 @@
                     <a href="/guestbook/">网友讨论</a> ::
                 </div>
                 <table class="list">
-                    {{ range first 15 (sort hugo.Data.recent_updates ".date" "desc") }}
+                    {{ range first 15 (sort site.Data.recent_updates ".date" "desc") }}
                     <tr>
                         <td class="list-cat">{{ .date }}:</td>
                         <td class="list-title"><div class="scrollTitle"><a href="{{ .url }}">{{ .title }}</a></div></td>
